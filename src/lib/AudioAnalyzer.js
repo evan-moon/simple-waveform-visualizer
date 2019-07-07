@@ -8,26 +8,38 @@ class AudioAnalyzer {
 
     this.audioContext = new (AudioContext || webkitAudioContext)();
     this.sourceBuffer = this.audioContext.createBufferSource();
-    this.sampleRate = 10000;
+    this.waveFormBox = document.getElementById('waveform');
+    this.waveFormPathGroup = document.getElementById('waveform-path-group');
+    this.sampleRate = 0;
     this.peaks = [];
+
+    this.updateViewboxSize();
   }
 
   setAudio (audioFile) {
     this.audioContext.decodeAudioData(audioFile).then(buffer => {
       this.sourceBuffer.buffer = buffer;
+      this.sampleRate = buffer.sampleRate;
+      this.updateViewboxSize();
       this.setPeaks();
       this.draw();
     });
+  }
+
+  updateViewboxSize () {
+    this.waveFormBox.setAttribute('viewBox', `0 -1 ${this.sampleRate} 2`);
   }
 
   setPeaks () {
     const buffer = this.sourceBuffer.buffer;
     const length = this.sampleRate;
 
-    const sampleSize = buffer.length / this.sampleRate;
+    const sampleSize = buffer.length / length;
     const sampleStep = Math.floor(sampleSize / 10) || 1;
     const numberOfChannels = buffer.numberOfChannels;
     const mergedPeaks = [];
+
+    console.log(buffer.length, length, sampleSize, sampleStep);
 
     for (let channelIndex = 0; channelIndex < numberOfChannels; channelIndex++) {
       const peaks = [];
@@ -42,8 +54,12 @@ class AudioAnalyzer {
         for (let sampleIndex = start; sampleIndex < end; sampleIndex += sampleStep) {
           const value = channelData[sampleIndex];
 
-          if (value > max) { max = value; }
-          if (value < min) { min = value; }
+          if (value > max) {
+            max = value;
+          }
+          if (value < min) {
+            min = value;
+          }
         }
 
         peaks[2 * peakIndex] = max;
@@ -70,26 +86,26 @@ class AudioAnalyzer {
 
       let d = '';
       for(let peakNumber = 0; peakNumber < totalPeaks; peakNumber++) {
-        if (peakNumber%2 === 0) {
-          d += ` M${~~(peakNumber/2)}, ${peaks.shift()}`;
+        if (peakNumber % 2 === 0) {
+          d += ` M${Math.floor(peakNumber / 2)}, ${peaks.shift()}`;
         } else {
-          d += ` L${~~(peakNumber/2)}, ${peaks.shift()}`;
+          d += ` L${Math.floor(peakNumber / 2)}, ${peaks.shift()}`;
         }
       }
 
-      const svg = document.getElementById('waveform-path-group');
       const path = document.createElementNS('http://www.w3.org/2000/svg', 'path');
       path.setAttributeNS(null, 'd', d);
 
-      svg.appendChild(path);
+      this.waveFormPathGroup.appendChild(path);
     }
   }
 
   reset () {
     this.audioContext = new (AudioContext || webkitAudioContext)();
     this.sourceBuffer = this.audioContext.createBufferSource();
-    this.sampleRate = 6000;
+    this.sampleRate = 0;
     this.peaks = [];
+    this.updateViewboxSize();
   }
 }
 
