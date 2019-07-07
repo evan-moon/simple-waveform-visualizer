@@ -6,6 +6,7 @@ import AudioAnalyzer from './lib/AudioAnalyzer';
   inputDOM.onchange = e => {
     const file = e.currentTarget.files[0];
     if (file) {
+      AudioAnalyzer.reset();
       const reader = new FileReader();
       reader.onload = e => AudioAnalyzer.setAudio(e.target.result);
       reader.readAsArrayBuffer(file);
