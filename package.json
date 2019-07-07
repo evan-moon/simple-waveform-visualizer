@@ -4,7 +4,8 @@
   "description": "waveform visualization test",
   "main": "index.js",
   "scripts": {
-    "start": "webpack-dev-server --env dev --mode none",
+    "start": "node server.js",
+    "dev": "webpack-dev-server --env dev --mode none",
     "build": "webpack --env prod --mode production",
     "test": "test"
   },
@@ -23,7 +24,11 @@
     "url": "https://github.com/evan-moon/waveform-visualizer/issues"
   },
   "homepage": "https://github.com/evan-moon/waveform-visualizer#readme",
-  "dependencies": {},
+  "dependencies": {
+    "compression": "^1.7.4",
+    "express": "^4.17.1",
+    "express-history-api-fallback": "^2.2.1"
+  },
   "devDependencies": {
     "@babel/core": "^7.5.0",
     "babel-loader": "^8.0.6",
@@ -36,5 +41,9 @@
     "webpack-cli": "^3.3.5",
     "webpack-dev-server": "^3.7.2",
     "webpack-merge": "^4.2.1"
+  },
+  "engines": {
+    "node": ">= 10.0.0",
+    "npm": ">= 3.0.0"
   }
 }
