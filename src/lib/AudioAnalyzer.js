@@ -8,7 +8,7 @@ class AudioAnalyzer {
 
     this.audioContext = new (AudioContext || webkitAudioContext)();
     this.sourceBuffer = this.audioContext.createBufferSource();
-    this.sampleRate = 6000;
+    this.sampleRate = 10000;
     this.peaks = [];
   }
 
