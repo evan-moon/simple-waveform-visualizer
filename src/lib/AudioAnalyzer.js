@@ -25,17 +25,17 @@ class AudioAnalyzer {
     const length = this.sampleRate;
 
     const sampleSize = buffer.length / this.sampleRate;
-    const sampleStep = ~~(sampleSize / 10) || 1;
+    const sampleStep = Math.floor(sampleSize / 10) || 1;
     const numberOfChannels = buffer.numberOfChannels;
     const mergedPeaks = [];
 
-    for (let channelNumber = 0; channelNumber < numberOfChannels; channelNumber++) {
+    for (let channelIndex = 0; channelIndex < numberOfChannels; channelIndex++) {
       const peaks = [];
-      const channelData = buffer.getChannelData(channelNumber);
+      const channelData = buffer.getChannelData(channelIndex);
 
-      for (let peakNumber = 0; peakNumber < length; peakNumber++) {
-        const start = ~~(peakNumber * sampleSize);
-        const end = ~~(start + sampleSize);
+      for (let peakIndex = 0; peakIndex < length; peakIndex++) {
+        const start = Math.floor(peakIndex * sampleSize);
+        const end = Math.floor(start + sampleSize);
         let min = channelData[0];
         let max = channelData[0];
 
@@ -46,15 +46,15 @@ class AudioAnalyzer {
           if (value < min) { min = value; }
         }
 
-        peaks[2 * peakNumber] = max;
-        peaks[2 * peakNumber + 1] = min;
+        peaks[2 * peakIndex] = max;
+        peaks[2 * peakIndex + 1] = min;
 
-        if (channelNumber === 0 || max > mergedPeaks[2 * peakNumber]) {
-          mergedPeaks[2 * peakNumber] = max;
+        if (channelIndex === 0 || max > mergedPeaks[2 * peakIndex]) {
+          mergedPeaks[2 * peakIndex] = max;
         }
 
-        if (channelNumber === 0 || min < mergedPeaks[2 * peakNumber + 1]) {
-          mergedPeaks[2 * peakNumber + 1] = min;
+        if (channelIndex === 0 || min < mergedPeaks[2 * peakIndex + 1]) {
+          mergedPeaks[2 * peakIndex + 1] = min;
         }
       }
     }
