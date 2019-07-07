@@ -4,6 +4,8 @@
   "description": "waveform visualization test",
   "main": "index.js",
   "scripts": {
+    "start": "webpack-dev-server --env dev --mode none",
+    "build": "webpack --env prod --mode production",
     "test": "test"
   },
   "repository": {
@@ -11,12 +13,27 @@
     "url": "git+https://github.com/evan-moon/waveform-visualizer.git"
   },
   "keywords": [
-    "audio", "waveform", "sample"
+    "audio",
+    "waveform",
+    "sample"
   ],
   "author": "Evan Moon",
   "license": "MIT",
   "bugs": {
     "url": "https://github.com/evan-moon/waveform-visualizer/issues"
   },
-  "homepage": "https://github.com/evan-moon/waveform-visualizer#readme"
+  "homepage": "https://github.com/evan-moon/waveform-visualizer#readme",
+  "dependencies": {},
+  "devDependencies": {
+    "@babel/core": "^7.5.0",
+    "babel-loader": "^8.0.6",
+    "babel-preset-env": "^1.7.0",
+    "clean-webpack-plugin": "^3.0.0",
+    "css-loader": "^3.0.0",
+    "html-webpack-plugin": "^3.2.0",
+    "webpack": "^4.35.2",
+    "webpack-cli": "^3.3.5",
+    "webpack-dev-server": "^3.7.2",
+    "webpack-merge": "^4.2.1"
+  }
 }
