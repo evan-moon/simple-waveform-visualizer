@@ -6,7 +6,57 @@ body {
 }
 h1 {
     margin-bottom: 20px;
+    text-align: center;
 }
+.btn {
+    cursor: pointer;
+    padding: 12px 24px;
+    background-color: black;
+    color: white;
+    border-radius: 4px;
+    transition: opacity .3s ease-in-out;
+    border: none;
+    outline: 0;
+}
+.btn:hover {
+    opacity: .8;
+}
+
+#audio-uploader-wrapper {
+    text-align: center;
+}
+#audio-uploader-wrapper label {
+    display: inline-block;
+}
+#audio-uploader-wrapper input#audio-uploader {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    top: -9999px;
+    left: -9999px;
+}
+
+#audio-info {
+    text-align: center;
+}
+#audio-info ul {
+    display: inline-block;
+    text-align: left;
+    padding: 20px;
+    border: 1px solid black;
+}
+#audio-info ul li {
+    margin-bottom: 10px;
+    list-style: none;
+}
+#audio-info ul li:last-child {
+    margin-bottom: 0;
+}
+
+#play-button {
+    background-color: #7f00ff;
+}
+
 #waveform {
     margin-top: 20px;
     stroke: #7f00ff;

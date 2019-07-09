@@ -23,13 +23,12 @@ class AudioAnalyzer {
       this.updateViewboxSize();
       this.parsePeaks();
       this.draw();
-      this.play(buffer);
     });
   }
   
-  play (buffer) {
+  play () {
     const sourceBuffer = this.audioContext.createBufferSource();
-    sourceBuffer.buffer = buffer;
+    sourceBuffer.buffer = this.audioBuffer;
     sourceBuffer.connect(this.audioContext.destination);
     sourceBuffer.start();
   }
@@ -78,6 +77,18 @@ class AudioAnalyzer {
     }
 
     this.peaks = mergedPeaks;
+    this.updateVisualInfo();
+  }
+
+  updateVisualInfo () {
+    document.getElementById('audio-info').innerHTML = `
+      <ul>
+        <li>Sample rate: ${this.sampleRate}hz</li>
+        <li>Total Peaks: ${this.audioBuffer.length} peaks</li>
+        <li>Compressed Peaks: ${this.peaks.length} peaks</li>
+        <li>Duration: ${Math.ceil(this.audioBuffer.duration)} seconds</li>
+      </ul>
+    `
   }
 
   draw () {
@@ -89,7 +100,8 @@ class AudioAnalyzer {
       for(let peakNumber = 0; peakNumber < totalPeaks; peakNumber++) {
         if (peakNumber % 2 === 0) {
           d += ` M${Math.floor(peakNumber / 2)}, ${peaks.shift()}`;
-        } else {
+        }
+        else {
           d += ` L${Math.floor(peakNumber / 2)}, ${peaks.shift()}`;
         }
       }
