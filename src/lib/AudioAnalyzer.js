@@ -41,25 +41,24 @@ class AudioAnalyzer {
   parsePeaks () {
     // const buffer = this.sourceBuffer.buffer;
     const buffer = this.audioBuffer;
-    const length = this.sampleRate;
+    const sampleRate = this.sampleRate;
 
-    const sampleSize = buffer.length / length;
+    const sampleSize = buffer.length / sampleRate;
     const sampleStep = Math.floor(sampleSize / 10) || 1;
     const numberOfChannels = buffer.numberOfChannels;
     const mergedPeaks = [];
 
     for (let channelIndex = 0; channelIndex < numberOfChannels; channelIndex++) {
-      const peaks = [];
-      const channelData = buffer.getChannelData(channelIndex);
-
-      for (let peakIndex = 0; peakIndex < length; peakIndex++) {
-        const start = Math.floor(peakIndex * sampleSize);
+      const peaks = buffer.getChannelData(channelIndex);
+      
+      Array(sampleRate).fill().forEach((v, newPeakIndex) => {
+        const start = Math.floor(newPeakIndex * sampleSize);
         const end = Math.floor(start + sampleSize);
-        let min = channelData[0];
-        let max = channelData[0];
+        let min = peaks[0];
+        let max = peaks[0];
 
         for (let sampleIndex = start; sampleIndex < end; sampleIndex += sampleStep) {
-          const v = channelData[sampleIndex];
+          const v = peaks[sampleIndex];
 
           if (v > max) {
             max = v;
@@ -69,16 +68,13 @@ class AudioAnalyzer {
           }
         }
 
-        peaks[2 * peakIndex] = max;
-        peaks[2 * peakIndex + 1] = min;
-
-        if (channelIndex === 0 || max > mergedPeaks[2 * peakIndex]) {
-          mergedPeaks[2 * peakIndex] = max;
+        if (channelIndex === 0 || max > mergedPeaks[2 * newPeakIndex]) {
+          mergedPeaks[2 * newPeakIndex] = max;
         }
-        if (channelIndex === 0 || min < mergedPeaks[2 * peakIndex + 1]) {
-          mergedPeaks[2 * peakIndex + 1] = min;
+        if (channelIndex === 0 || min < mergedPeaks[2 * newPeakIndex + 1]) {
+          mergedPeaks[2 * newPeakIndex + 1] = min;
         }
-      }
+      });
     }
 
     this.peaks = mergedPeaks;
