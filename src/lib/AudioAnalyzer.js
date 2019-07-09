@@ -7,7 +7,7 @@ class AudioAnalyzer {
     }
 
     this.audioContext = new (AudioContext || webkitAudioContext)();
-    this.sourceBuffer = this.audioContext.createBufferSource();
+    this.audioBuffer = null;
     this.waveFormBox = document.getElementById('waveform');
     this.waveFormPathGroup = document.getElementById('waveform-path-group');
     this.sampleRate = 0;
@@ -18,28 +18,35 @@ class AudioAnalyzer {
 
   setAudio (audioFile) {
     this.audioContext.decodeAudioData(audioFile).then(buffer => {
-      this.sourceBuffer.buffer = buffer;
+      this.audioBuffer = buffer;
       this.sampleRate = buffer.sampleRate;
       this.updateViewboxSize();
-      this.setPeaks();
+      this.parsePeaks();
       this.draw();
+      this.play(buffer);
     });
+  }
+  
+  play (buffer) {
+    const sourceBuffer = this.audioContext.createBufferSource();
+    sourceBuffer.buffer = buffer;
+    sourceBuffer.connect(this.audioContext.destination);
+    sourceBuffer.start();
   }
 
   updateViewboxSize () {
     this.waveFormBox.setAttribute('viewBox', `0 -1 ${this.sampleRate} 2`);
   }
 
-  setPeaks () {
-    const buffer = this.sourceBuffer.buffer;
+  parsePeaks () {
+    // const buffer = this.sourceBuffer.buffer;
+    const buffer = this.audioBuffer;
     const length = this.sampleRate;
 
     const sampleSize = buffer.length / length;
     const sampleStep = Math.floor(sampleSize / 10) || 1;
     const numberOfChannels = buffer.numberOfChannels;
     const mergedPeaks = [];
-
-    console.log(buffer.length, length, sampleSize, sampleStep);
 
     for (let channelIndex = 0; channelIndex < numberOfChannels; channelIndex++) {
       const peaks = [];
@@ -52,13 +59,13 @@ class AudioAnalyzer {
         let max = channelData[0];
 
         for (let sampleIndex = start; sampleIndex < end; sampleIndex += sampleStep) {
-          const value = channelData[sampleIndex];
+          const v = channelData[sampleIndex];
 
-          if (value > max) {
-            max = value;
+          if (v > max) {
+            max = v;
           }
-          if (value < min) {
-            min = value;
+          else if (v < min) {
+            min = v;
           }
         }
 
@@ -68,7 +75,6 @@ class AudioAnalyzer {
         if (channelIndex === 0 || max > mergedPeaks[2 * peakIndex]) {
           mergedPeaks[2 * peakIndex] = max;
         }
-
         if (channelIndex === 0 || min < mergedPeaks[2 * peakIndex + 1]) {
           mergedPeaks[2 * peakIndex + 1] = min;
         }
@@ -79,8 +85,7 @@ class AudioAnalyzer {
   }
 
   draw () {
-    const buffer = this.sourceBuffer.buffer;
-    if (buffer) {
+    if (this.audioBuffer) {
       const peaks = this.peaks;
       const totalPeaks = peaks.length;
 
@@ -102,7 +107,7 @@ class AudioAnalyzer {
 
   reset () {
     this.audioContext = new (AudioContext || webkitAudioContext)();
-    this.sourceBuffer = this.audioContext.createBufferSource();
+    this.audioBuffer = null;
     this.sampleRate = 0;
     this.peaks = [];
     this.updateViewboxSize();
