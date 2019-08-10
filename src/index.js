@@ -3,10 +3,14 @@ import { Audio } from './lib/Audio';
 import { WaveForm } from './lib/WaveForm';
 
 (function () {
-  const inputDOM = document.getElementById('audio-uploader');
-  const playButtonDOM = document.getElementById('play-button');
-  const gainController = document.getElementById('gain-controller');
-  const analyzer = new Audio();
+  if (!window.AudioContext) {
+    const errorMsg = 'Web Audio API is not supported';
+    alert(errorMsg);
+    throw new Error(errorMsg);
+  }
+
+  const audioContext = new (AudioContext || webkitAudioContext)();
+  const audio = new Audio(audioContext);
 
   playButtonDOM.onclick = e => {
     analyzer.play();

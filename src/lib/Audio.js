@@ -1,17 +1,15 @@
 export class Audio {
-  constructor () {
-    if (!window.AudioContext) {
-      const errorMsg = 'Web Audio API is not supported';
-      alert(errorMsg);
-      throw new Error(errorMsg);
+  constructor (context) {
+    if (!context) {
+      throw new Error('There is no AudioContext');
     }
-
-    this.audioContext = new (AudioContext || webkitAudioContext)();
+    this.audioContext = context;
     this.audioBuffer = null;
     this.sampleRate = 0;
     this.peaks = [];
     this.sourceBuffer = null;
-    this.gainNode = this.audioContext.createGain();
+    this.gainNode = this.audioContext.createGain(); // 트랙 마스터 볼륨
+    this.effects = [];
   }
 
   setAudio (audioFile) {
@@ -84,5 +82,34 @@ export class Audio {
     this.audioBuffer = null;
     this.sampleRate = 0;
     this.peaks = [];
+  }
+
+  addEffect (effect) {
+    const prevNode = this.effects.length > 0
+      ? this.effects[this.effects.length - 1]
+      : this.sourceBuffer;
+
+    prevNode.disconnect();
+    prevNode.connect(effect.inputNode);
+    effect.outputNode.connect(this.gainNode);
+  }
+
+  removeEffect (effect) {
+    const index = this.effects(effect);
+    if (!~index) {
+      return;
+    }
+
+    const prevNode = index === 0
+      ? this.sourceBuffer
+      : this.effects[index - 1];
+    prevNode.disconnect();
+
+    const effector = this.effects[index];
+    effector.disconnect();
+    this.effects.splice(index, 1);
+
+    const targetNode = this.effects[index] || this.gainNode;
+    prevNode.connect(targetNode);
   }
 }
