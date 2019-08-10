@@ -1,20 +1,20 @@
 export class WaveForm {
- constructor (audioAnalyzer) {
-   if (!audioAnalyzer || audioAnalyzer.constructor.name !== 'AudioAnalyzer') {
-     throw new Error('WaveForm needs AudioAnalyzer object');
+ constructor (audio) {
+   if (!audio || audio.constructor.name !== 'Audio') {
+     throw new Error('WaveForm needs Audio object');
    }
-   this.audioAnalyzer = audioAnalyzer;
+   this.audio = audio;
  }
 
  draw ({ svgBoxId, pathGroupId }) {
    const waveFormBox = document.getElementById(svgBoxId);
    const pathGroup = document.getElementById(pathGroupId);
-   const sampleRate = this.audioAnalyzer.sampleRate;
+   const sampleRate = this.audio.sampleRate;
 
    waveFormBox.setAttribute('viewBox', `0 -1 ${sampleRate} 2`);
 
-   const audioBuffer = this.audioAnalyzer.audioBuffer;
-   const peaks = this.audioAnalyzer.peaks;
+   const audioBuffer = this.audio.audioBuffer;
+   const peaks = this.audio.peaks;
    if (audioBuffer) {
      const totalPeaks = peaks.length;
 

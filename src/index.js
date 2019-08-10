@@ -1,12 +1,12 @@
 import './index.css';
-import { AudioAnalyzer } from './lib/AudioAnalyzer';
+import { Audio } from './lib/Audio';
 import { WaveForm } from './lib/WaveForm';
 
 (function () {
   const inputDOM = document.getElementById('audio-uploader');
   const playButtonDOM = document.getElementById('play-button');
   const gainController = document.getElementById('gain-controller');
-  const analyzer = new AudioAnalyzer();
+  const analyzer = new Audio();
 
   playButtonDOM.onclick = e => {
     analyzer.play();

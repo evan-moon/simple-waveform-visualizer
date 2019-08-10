@@ -1,4 +1,4 @@
-export class AudioAnalyzer {
+export class Audio {
   constructor () {
     if (!window.AudioContext) {
       const errorMsg = 'Web Audio API is not supported';
