@@ -1,6 +1,7 @@
 export class WaveForm {
  constructor (audio) {
-   if (!audio || audio.constructor.name !== 'Audio') {
+   console.log(audio.constructor.name);
+   if (!audio) {
      throw new Error('WaveForm needs Audio object');
    }
    this.audio = audio;
