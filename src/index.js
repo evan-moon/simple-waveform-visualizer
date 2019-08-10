@@ -1,6 +1,7 @@
 import './index.css';
 import { Audio } from './lib/Audio';
 import { WaveForm } from './lib/WaveForm';
+import {Compressor} from './effects/Compressor';
 
 (function () {
   if (!window.AudioContext) {
@@ -12,28 +13,56 @@ import { WaveForm } from './lib/WaveForm';
   const audioContext = new (AudioContext || webkitAudioContext)();
   const audio = new Audio(audioContext);
 
-  playButtonDOM.onclick = e => {
-    analyzer.play();
+  document.getElementById('play-button').onclick = e => {
+    audio.play();
   };
 
-  gainController.oninput = e => {
+  document.getElementById('gain-controller').oninput = e => {
     const gain = parseInt(e.target.value);
-    analyzer.setGain((gain / 100) * 2);
+    audio.setGain((gain / 100) * 2);
   };
 
-  inputDOM.onchange = e => {
+  document.getElementById('audio-uploader').onchange = e => {
     const file = e.currentTarget.files[0];
     if (file) {
       const reader = new FileReader();
       reader.onload = e => {
-        analyzer.setAudio(e.target.result).then(res => {
-          const waveForm = new WaveForm(analyzer);
+        audio.setAudio(e.target.result).then(() => {
+          const waveForm = new WaveForm(audio);
           waveForm.draw({ svgBoxId: 'waveform', pathGroupId: 'waveform-path-group' });
         });
 
-        playButtonDOM.style.display = 'inline-block';
+        document.getElementById('play-button').style.display = 'inline-block';
+        document.getElementById('add-comp-button').style.display = 'inline-block';
       };
       reader.readAsArrayBuffer(file);
     }
-  }
+  };
+
+  document.getElementById('add-comp-button').onclick = e => {
+    window.comp = new Compressor(audioContext);
+    audio.addEffect(comp);
+    document.getElementById('compressor-panel').style.display = 'block';
+  };
+
+  document.getElementById('threshold-controller').oninput = e => {
+    const value = parseInt(e.target.value);
+    window.comp.setThreshold(value);
+  };
+  document.getElementById('knee-controller').oninput = e => {
+    const value = parseInt(e.target.value);
+    window.comp.setKnee(value);
+  };
+  document.getElementById('attack-controller').oninput = e => {
+    const value = parseInt(e.target.value);
+    window.comp.setAttack(value / 1000);
+  };
+  document.getElementById('release-controller').oninput = e => {
+    const value = parseInt(e.target.value);
+    window.comp.setRelease(value / 100);
+  };
+  document.getElementById('ratio-controller').oninput = e => {
+    const value = parseInt(e.target.value);
+    window.comp.setRatio(value);
+  };
 })();
