@@ -1,0 +1,37 @@
+export class WaveForm {
+ constructor (audioAnalyzer) {
+   if (!audioAnalyzer || audioAnalyzer.constructor.name !== 'AudioAnalyzer') {
+     throw new Error('WaveForm needs AudioAnalyzer object');
+   }
+   this.audioAnalyzer = audioAnalyzer;
+ }
+
+ draw ({ svgBoxId, pathGroupId }) {
+   const waveFormBox = document.getElementById(svgBoxId);
+   const pathGroup = document.getElementById(pathGroupId);
+   const sampleRate = this.audioAnalyzer.sampleRate;
+
+   waveFormBox.setAttribute('viewBox', `0 -1 ${sampleRate} 2`);
+
+   const audioBuffer = this.audioAnalyzer.audioBuffer;
+   const peaks = this.audioAnalyzer.peaks;
+   if (audioBuffer) {
+     const totalPeaks = peaks.length;
+
+     let d = '';
+     for(let peakNumber = 0; peakNumber < totalPeaks; peakNumber++) {
+       if (peakNumber % 2 === 0) {
+         d += ` M${Math.floor(peakNumber / 2)}, ${peaks.shift()}`;
+       }
+       else {
+         d += ` L${Math.floor(peakNumber / 2)}, ${peaks.shift()}`;
+       }
+     }
+
+     const path = document.createElementNS('http://www.w3.org/2000/svg', 'path');
+     path.setAttributeNS(null, 'd', d);
+
+     pathGroup.appendChild(path);
+   }
+ }
+}
