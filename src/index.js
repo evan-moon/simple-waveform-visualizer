@@ -17,9 +17,10 @@ import {Compressor} from './effects/Compressor';
     audio.play();
   };
 
-  document.getElementById('gain-controller').oninput = e => {
-    const gain = parseInt(e.target.value);
-    audio.setGain((gain / 100) * 2);
+  document.getElementById('add-comp-button').onclick = e => {
+    window.comp = new Compressor(audioContext);
+    audio.addEffect(comp);
+    document.getElementById('compressor-panel').style.display = 'block';
   };
 
   document.getElementById('audio-uploader').onchange = e => {
@@ -34,15 +35,15 @@ import {Compressor} from './effects/Compressor';
 
         document.getElementById('play-button').style.display = 'inline-block';
         document.getElementById('add-comp-button').style.display = 'inline-block';
+        document.getElementById('master-panel').style.display = 'inline-block';
       };
       reader.readAsArrayBuffer(file);
     }
   };
 
-  document.getElementById('add-comp-button').onclick = e => {
-    window.comp = new Compressor(audioContext);
-    audio.addEffect(comp);
-    document.getElementById('compressor-panel').style.display = 'block';
+  document.getElementById('master-gain-controller').oninput = e => {
+    const gain = parseInt(e.target.value);
+    audio.setGain((gain / 100) * 2);
   };
 
   document.getElementById('threshold-controller').oninput = e => {

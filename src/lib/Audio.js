@@ -33,6 +33,7 @@ export class Audio {
   }
   
   play () {
+    this.sourceBuffer.loop = true;
     this.sourceBuffer.start();
   }
 

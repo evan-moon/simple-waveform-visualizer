@@ -72,6 +72,9 @@ h1 {
     height: 50vh;
 }
 
+#master-panel {
+    display: none;
+}
 #compressor-panel {
     display: none;
 }
