@@ -1,21 +1,32 @@
 import './index.css';
-import AudioAnalyzer from './lib/AudioAnalyzer';
+import { AudioAnalyzer } from './lib/AudioAnalyzer';
+import { WaveForm } from './lib/WaveForm';
 
 (function () {
   const inputDOM = document.getElementById('audio-uploader');
   const playButtonDOM = document.getElementById('play-button');
+  const gainController = document.getElementById('gain-controller');
+  const analyzer = new AudioAnalyzer();
 
   playButtonDOM.onclick = e => {
-    AudioAnalyzer.play();
-  }
+    analyzer.play();
+  };
+
+  gainController.oninput = e => {
+    const gain = parseInt(e.target.value);
+    analyzer.setGain((gain / 100) * 2);
+  };
 
   inputDOM.onchange = e => {
     const file = e.currentTarget.files[0];
     if (file) {
-      AudioAnalyzer.reset();
       const reader = new FileReader();
       reader.onload = e => {
-        AudioAnalyzer.setAudio(e.target.result)
+        analyzer.setAudio(e.target.result).then(res => {
+          const waveForm = new WaveForm(analyzer);
+          waveForm.draw({ svgBoxId: 'waveform', pathGroupId: 'waveform-path-group' });
+        });
+
         playButtonDOM.style.display = 'inline-block';
       };
       reader.readAsArrayBuffer(file);

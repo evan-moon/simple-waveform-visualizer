@@ -15,10 +15,13 @@
         <button id="play-button" class="btn">Play</button>
         <input id="audio-uploader" type="file">
     </div>
-    <div id=audio-info></div>
 
     <svg id="waveform" preserveAspectRatio="none">
         <g id="waveform-path-group"></g>
     </svg>
+    <div>
+        <label>Gain</label>
+        <input id="gain-controller" type="range" value="50" min="0" max="100">
+    </div>
 </body>
 </html>

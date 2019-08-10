@@ -11,6 +11,7 @@ export class AudioAnalyzer {
     this.sampleRate = 0;
     this.peaks = [];
     this.sourceBuffer = null;
+    this.gainNode = this.audioContext.createGain();
   }
 
   setAudio (audioFile) {
@@ -19,18 +20,25 @@ export class AudioAnalyzer {
       this.sampleRate = buffer.sampleRate;
       this.sourceBuffer = this.audioContext.createBufferSource();
       this.sourceBuffer.buffer = buffer;
+      this.sourceBuffer.connect(this.gainNode);
+      this.gainNode.connect(this.audioContext.destination);
       this.parsePeaks();
     });
   }
+
+  mute () {
+    this.gainNode.gain.value = 0;
+  }
+
+  setGain (value) {
+    this.gainNode.gain.value = value;
+  }
   
   play () {
-    const sourceBuffer = this.sourceBuffer;
-    sourceBuffer.connect(this.audioContext.destination);
-    sourceBuffer.start();
+    this.sourceBuffer.start();
   }
 
   parsePeaks () {
-    // const buffer = this.sourceBuffer.buffer;
     const buffer = this.audioBuffer;
     const sampleRate = this.sampleRate;
 
@@ -70,8 +78,6 @@ export class AudioAnalyzer {
 
     this.peaks = mergedPeaks;
   }
-
-
 
   reset () {
     this.audioContext = new (AudioContext || webkitAudioContext)();
