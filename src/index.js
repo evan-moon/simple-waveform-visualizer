@@ -101,7 +101,6 @@ import { HighPassFilter, LowPassFilter } from './effects/Filter';
   };
   document.getElementById('low-pass-filter-frequency').oninput = e => {
     const value = parseFloat(e.target.value);
-    console.log(value);
     window.lowPassFilter.setFrequency(value);
   };
   document.getElementById('low-pass-q').oninput = e => {
@@ -114,7 +113,6 @@ import { HighPassFilter, LowPassFilter } from './effects/Filter';
   };
   document.getElementById('high-pass-q').oninput = e => {
     const value = parseFloat(e.target.value) / 10000;
-    console.log(value);
     window.highPassFilter.setQ(value);
   };
 })();
