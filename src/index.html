@@ -1,46 +1,47 @@
 <!doctype html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport"
-          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.1/normalize.min.css" rel="stylesheet">
-    <title>Document</title>
+  <meta charset="UTF-8">
+  <meta name="viewport"
+        content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.1/normalize.min.css" rel="stylesheet">
+  <title>Document</title>
 </head>
 <body>
-    <h1>Audio Visualizer Sample</h1>
-    <div id=audio-uploader-wrapper>
-        <label class="btn" for="audio-uploader">Upload Your Audio</label>
-        <button id="play-button" class="btn">Play</button>
-        <input id="audio-uploader" type="file">
-        <button id="add-comp-button" class="btn">Add Compressor</button>
-    </div>
+  <h1>Audio Visualizer Sample</h1>
+  <div id=audio-uploader-wrapper>
+    <label class="btn" for="audio-uploader">Upload Your Audio</label>
+    <button id="play-button" class="btn">Play</button>
+    <input id="audio-uploader" type="file">
+    <button id="add-comp-button" class="btn">Add Compressor</button>
+    <button id="add-reverb-button" class="btn">Add Reverb</button>
+  </div>
 
-    <svg id="waveform" preserveAspectRatio="none">
-        <g id="waveform-path-group"></g>
-    </svg>
-    <div id="master-panel">
-        <h5>Audio Control</h5>
-        <label>Master Gain</label>
-        <input id="master-gain-controller" type="range" value="50" min="0" max="100">
-    </div>
-    <div id="compressor-panel">
-        <h5>Compressor Control</h5>
-        <label>Threshold</label>
-        <input id="threshold-controller" type="range" value="-50" min="-100" max="0">
+  <svg id="waveform" preserveAspectRatio="none">
+    <g id="waveform-path-group"></g>
+  </svg>
+  <div id="master-panel">
+    <h5>Audio Control</h5>
+    <label>Master Gain</label>
+    <input id="master-gain-controller" type="range" value="50" min="0" max="100">
+  </div>
+  <div id="compressor-panel">
+    <h5>Compressor Control</h5>
+    <label>Threshold</label>
+    <input id="threshold-controller" type="range" value="-50" min="-100" max="0">
 
-        <label>Knee</label>
-        <input id="knee-controller" type="range" value="30" min="0" max="40">
+    <label>Knee</label>
+    <input id="knee-controller" type="range" value="30" min="0" max="40">
 
-        <label>Attack</label>
-        <input id="attack-controller" type="range" value="3" min="0" max="1000">
+    <label>Attack</label>
+    <input id="attack-controller" type="range" value="3" min="0" max="1000">
 
-        <label>Release</label>
-        <input id="release-controller" type="range" value="25" min="0" max="100">
+    <label>Release</label>
+    <input id="release-controller" type="range" value="25" min="0" max="100">
 
-        <label>Ratio</label>
-        <input id="ratio-controller" type="range" value="12" min="1" max="20">
-    </div>
+    <label>Ratio</label>
+    <input id="ratio-controller" type="range" value="12" min="1" max="20">
+  </div>
 </body>
 </html>
