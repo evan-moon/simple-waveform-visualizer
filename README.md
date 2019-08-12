@@ -2,7 +2,7 @@
 JavaScript AudioContext API과 SVG를 사용하여 WaveForm를 렌더하고 몇가지 이펙터를 간단히 만들어보는 실험실.
 
 ## Live Demo
-![image](./screenshot.png)
+![image](./thumbnail.png)
 
 [Live Demo](https://simple-audio-waveform.herokuapp.com/)는 여기서 확인하실 수 있습니다.
 
