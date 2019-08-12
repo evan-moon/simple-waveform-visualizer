@@ -50,8 +50,8 @@ import { Reverb } from './effects/Reverb';
   };
 
   document.getElementById('master-gain-controller').oninput = e => {
-    const gain = parseInt(e.target.value);
-    audio.setGain((gain / 100) * 2);
+    const gain = parseInt(e.target.value) / 100;
+    audio.setGain(gain * 2);
   };
 
   document.getElementById('threshold-controller').oninput = e => {
@@ -59,23 +59,35 @@ import { Reverb } from './effects/Reverb';
     window.comp.setThreshold(value);
   };
   document.getElementById('knee-controller').oninput = e => {
-    const value = parseInt(e.target.value);
+    const value = parseFloat(e.target.value) / 1000;
     window.comp.setKnee(value);
   };
   document.getElementById('attack-controller').oninput = e => {
-    const value = parseInt(e.target.value);
+    const value = parseFloat(e.target.value) / 1000;
     window.comp.setAttack(value / 1000);
   };
   document.getElementById('release-controller').oninput = e => {
-    const value = parseInt(e.target.value);
+    const value = parseFloat(e.target.value);
     window.comp.setRelease(value / 100);
   };
   document.getElementById('ratio-controller').oninput = e => {
-    const value = parseInt(e.target.value);
+    const value = parseFloat(e.target.value);
     window.comp.setRatio(value);
   };
   document.getElementById('reverb-mix-controller').oninput = e => {
     const value = parseFloat(e.target.value) / 100;
     window.reverb.setMix(value);
   };
+  document.getElementById('reverb-time-controller').oninput = e => {
+    const value = parseFloat(e.target.value) / 100;
+    window.reverb.setTime(value);
+  };
+  document.getElementById('reverb-decay-controller').oninput = e => {
+    const value = parseFloat(e.target.value) / 100;
+    window.reverb.setDecay(value);
+  };
+  document.getElementById('reverb-gain-controller').oninput = e => {
+    const gain = parseFloat(e.target.value) / 100;
+    window.reverb.setGain(gain * 2);
+  }
 })();

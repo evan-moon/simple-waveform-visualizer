@@ -42,6 +42,11 @@ export class Reverb {
     this._generateImpulse();
   }
 
+  setGain (value) {
+    this.options.gain = value;
+    this.outputNode.gain.value = value;
+  }
+
   _generateImpulse () {
     const sampleRate = this.context.sampleRate;
     const length = sampleRate * this.options.time;
