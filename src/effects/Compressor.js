@@ -19,7 +19,7 @@ export class Compressor {
     this.compressorNode.ratio.setValueAtTime(this.options.ratio, t);
 
     this.inputNode = this.compressorNode;
-    this.outputNode = context.createGain();
+    this.outputNode = this.context.createGain();
     this.inputNode.connect(this.outputNode);
   }
 
