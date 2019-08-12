@@ -10,12 +10,16 @@
 </head>
 <body>
   <h1>Audio Visualizer Sample</h1>
-  <div id=audio-uploader-wrapper>
+  <div id="audio-uploader-wrapper">
     <label class="btn" for="audio-uploader">Upload Your Audio</label>
-    <button id="play-button" class="btn">Play</button>
     <input id="audio-uploader" type="file">
+  </div>
+  <div id="audio-controls">
+    <button id="play-button" class="btn">Play</button>
     <button id="add-comp-button" class="btn">Add Compressor</button>
     <button id="add-reverb-button" class="btn">Add Reverb</button>
+    <button id="add-low-pass-filter-button" class="btn">Add LPF</button>
+    <button id="add-high-pass-filter-button" class="btn">Add HPF</button>
   </div>
 
   <svg id="waveform" preserveAspectRatio="none">
@@ -26,7 +30,7 @@
     <label>Master Gain</label>
     <input id="master-gain-controller" type="range" value="50" min="0" max="100">
   </div>
-  <div id="compressor-panel">
+  <div id="compressor-panel" class="control-panel">
     <h5>Compressor Control</h5>
     <label>Threshold</label>
     <input id="threshold-controller" type="range" value="-50" min="-100" max="0">
@@ -43,7 +47,7 @@
     <label>Ratio</label>
     <input id="ratio-controller" type="range" value="12" min="1" max="20">
   </div>
-  <div id="reverb-panel">
+  <div id="reverb-panel" class="control-panel">
     <h5>Reverb Control</h5>
     <label>Dry/Wet</label>
     <input id="reverb-mix-controller" type="range" value="50" min="0" max="100">
@@ -56,6 +60,22 @@
 
     <label>Gain</label>
     <input id="reverb-gain-controller" type="range" value="50" min="0" max="100">
+  </div>
+  <div id="low-pass-filter-panel" class="control-panel">
+    <h5>Low Pass Filter Control</h5>
+    <label>Frequency</label>
+    <input id="low-pass-filter-frequency" type="range" value="350" min="1" max="22050">
+
+    <label>Q</label>
+    <input id="low-pass-q" type="range" value="1" min="1" max="100000">
+  </div>
+  <div id="high-pass-filter-panel" class="control-panel">
+    <h5>High Pass Filter Control</h5>
+    <label>Frequency</label>
+    <input id="high-pass-filter-frequency" type="range" value="20000" min="1" max="22050">
+
+    <label>Q</label>
+    <input id="high-pass-q" type="range" value="1" min="1" max="100000">
   </div>
 </body>
 </html>

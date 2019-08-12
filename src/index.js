@@ -3,6 +3,7 @@ import { Audio } from './lib/Audio';
 import { WaveForm } from './lib/WaveForm';
 import { Compressor } from './effects/Compressor';
 import { Reverb } from './effects/Reverb';
+import { HighPassFilter, LowPassFilter } from './effects/Filter';
 
 (function () {
   if (!window.AudioContext) {
@@ -23,11 +24,20 @@ import { Reverb } from './effects/Reverb';
     audio.addEffect(comp);
     document.getElementById('compressor-panel').style.display = 'block';
   };
-
   document.getElementById('add-reverb-button').onclick = e => {
     window.reverb = new Reverb(audioContext);
     audio.addEffect(reverb);
     document.getElementById('reverb-panel').style.display = 'block';
+  };
+  document.getElementById('add-low-pass-filter-button').onclick = e => {
+    window.lowPassFilter = new LowPassFilter(audioContext);
+    audio.addEffect(lowPassFilter);
+    document.getElementById('low-pass-filter-panel').style.display = 'block';
+  };
+  document.getElementById('add-high-pass-filter-button').onclick = e => {
+    window.highPassFilter = new HighPassFilter(audioContext);
+    audio.addEffect(highPassFilter);
+    document.getElementById('high-pass-filter-panel').style.display = 'block';
   };
 
   document.getElementById('audio-uploader').onchange = e => {
@@ -40,10 +50,9 @@ import { Reverb } from './effects/Reverb';
           waveForm.draw({ svgBoxId: 'waveform', pathGroupId: 'waveform-path-group' });
         });
 
-        document.getElementById('play-button').style.display = 'inline-block';
-        document.getElementById('add-comp-button').style.display = 'inline-block';
-        document.getElementById('master-panel').style.display = 'inline-block';
-        document.getElementById('add-reverb-button').style.display = 'inline-block';
+        document.getElementById('audio-controls').style.display = 'block';
+        document.getElementById('master-panel').style.display = 'block';
+        document.getElementById('audio-uploader-wrapper').style.display = 'none';
       };
       reader.readAsArrayBuffer(file);
     }
@@ -89,5 +98,23 @@ import { Reverb } from './effects/Reverb';
   document.getElementById('reverb-gain-controller').oninput = e => {
     const gain = parseFloat(e.target.value) / 100;
     window.reverb.setGain(gain * 2);
-  }
+  };
+  document.getElementById('low-pass-filter-frequency').oninput = e => {
+    const value = parseFloat(e.target.value);
+    console.log(value);
+    window.lowPassFilter.setFrequency(value);
+  };
+  document.getElementById('low-pass-q').oninput = e => {
+    const value = parseFloat(e.target.value) / 10000;
+    window.lowPassFilter.setQ(value);
+  };
+  document.getElementById('high-pass-filter-frequency').oninput = e => {
+    const value = parseFloat(e.target.value);
+    window.highPassFilter.setFrequency(value);
+  };
+  document.getElementById('high-pass-q').oninput = e => {
+    const value = parseFloat(e.target.value) / 10000;
+    console.log(value);
+    window.highPassFilter.setQ(value);
+  };
 })();
