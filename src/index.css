@@ -1,80 +1,86 @@
 * {
-    font-family: sans-serif;
+  font-family: sans-serif;
 }
 body {
-    padding: 20px;
+  padding: 20px;
 }
 h1 {
-    margin-bottom: 20px;
-    text-align: center;
+  margin-bottom: 20px;
+  text-align: center;
 }
 .btn {
-    cursor: pointer;
-    padding: 12px 24px;
-    background-color: black;
-    color: white;
-    border-radius: 4px;
-    transition: opacity .3s ease-in-out;
-    border: none;
-    outline: 0;
+  cursor: pointer;
+  padding: 12px 24px;
+  background-color: black;
+  color: white;
+  border-radius: 4px;
+  transition: opacity .3s ease-in-out;
+  border: none;
+  outline: 0;
 }
 .btn:hover {
-    opacity: .8;
+  opacity: .8;
 }
 
 #audio-uploader-wrapper {
-    text-align: center;
+  text-align: center;
 }
 #audio-uploader-wrapper label {
-    display: inline-block;
+  display: inline-block;
 }
 #audio-uploader-wrapper input#audio-uploader {
-    position: absolute;
-    width: 1px;
-    height: 1px;
-    top: -9999px;
-    left: -9999px;
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  top: -9999px;
+  left: -9999px;
 }
 
 #audio-info {
-    text-align: center;
+  text-align: center;
 }
 #audio-info ul {
-    display: inline-block;
-    text-align: left;
-    padding: 20px;
-    border: 1px solid black;
+  display: inline-block;
+  text-align: left;
+  padding: 20px;
+  border: 1px solid black;
 }
 #audio-info ul li {
-    margin-bottom: 10px;
-    list-style: none;
+  margin-bottom: 10px;
+  list-style: none;
 }
 #audio-info ul li:last-child {
-    margin-bottom: 0;
+  margin-bottom: 0;
 }
 
 #play-button {
-    display: none;
-    background-color: #7f00ff;
+  display: none;
+  background-color: #7f00ff;
 }
 #add-comp-button {
-    display: none;
+  display: none;
+}
+#add-reverb-button {
+  display: none;
 }
 
 #waveform {
-    margin-top: 20px;
-    stroke: #7f00ff;
-    width: 100%;
-    height: 50vh;
+  margin-top: 20px;
+  stroke: #7f00ff;
+  width: 100%;
+  height: 50vh;
 }
 #waveform g#waveform-path-group {
-    width: 100%;
-    height: 50vh;
+  width: 100%;
+  height: 50vh;
 }
 
 #master-panel {
-    display: none;
+  display: none;
 }
 #compressor-panel {
-    display: none;
+  display: none;
+}
+#reverb-panel {
+  display: none;
 }
