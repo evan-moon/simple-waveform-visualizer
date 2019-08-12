@@ -36,32 +36,16 @@ h1 {
   left: -9999px;
 }
 
-#audio-info {
+#master-panel {
+  display: none;
+}
+#audio-controls {
+  display: none;
   text-align: center;
-}
-#audio-info ul {
-  display: inline-block;
-  text-align: left;
-  padding: 20px;
-  border: 1px solid black;
-}
-#audio-info ul li {
-  margin-bottom: 10px;
-  list-style: none;
-}
-#audio-info ul li:last-child {
-  margin-bottom: 0;
 }
 
 #play-button {
-  display: none;
   background-color: #7f00ff;
-}
-#add-comp-button {
-  display: none;
-}
-#add-reverb-button {
-  display: none;
 }
 
 #waveform {
@@ -75,12 +59,6 @@ h1 {
   height: 50vh;
 }
 
-#master-panel {
-  display: none;
-}
-#compressor-panel {
-  display: none;
-}
-#reverb-panel {
+.control-panel {
   display: none;
 }
