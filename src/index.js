@@ -1,7 +1,8 @@
 import './index.css';
 import { Audio } from './lib/Audio';
 import { WaveForm } from './lib/WaveForm';
-import {Compressor} from './effects/Compressor';
+import { Compressor } from './effects/Compressor';
+import { Reverb } from './effects/Reverb';
 
 (function () {
   if (!window.AudioContext) {
@@ -23,6 +24,12 @@ import {Compressor} from './effects/Compressor';
     document.getElementById('compressor-panel').style.display = 'block';
   };
 
+  document.getElementById('add-reverb-button').onclick = e => {
+    window.reverb = new Reverb(audioContext);
+    audio.addEffect(reverb);
+    document.getElementById('reverb-panel').style.display = 'block';
+  };
+
   document.getElementById('audio-uploader').onchange = e => {
     const file = e.currentTarget.files[0];
     if (file) {
@@ -36,6 +43,7 @@ import {Compressor} from './effects/Compressor';
         document.getElementById('play-button').style.display = 'inline-block';
         document.getElementById('add-comp-button').style.display = 'inline-block';
         document.getElementById('master-panel').style.display = 'inline-block';
+        document.getElementById('add-reverb-button').style.display = 'inline-block';
       };
       reader.readAsArrayBuffer(file);
     }
@@ -65,5 +73,9 @@ import {Compressor} from './effects/Compressor';
   document.getElementById('ratio-controller').oninput = e => {
     const value = parseInt(e.target.value);
     window.comp.setRatio(value);
+  };
+  document.getElementById('reverb-mix-controller').oninput = e => {
+    const value = parseFloat(e.target.value) / 100;
+    window.reverb.setMix(value);
   };
 })();
