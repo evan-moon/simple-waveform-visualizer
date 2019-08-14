@@ -79,4 +79,9 @@ export class LowPassCombFilter {
   setDelay (value) {
     this.delayNode.delayTime.setValueAtTime(value, this.context.currentTime);
   }
+
+  setGain (value) {
+    console.log(value);
+    this.gainNode.gain.setValueAtTime(value, this.context.currentTime);
+  }
 }
