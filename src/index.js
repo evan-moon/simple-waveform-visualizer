@@ -1,9 +1,11 @@
 import './index.css';
 import { Audio } from './lib/Audio';
 import { WaveForm } from './lib/WaveForm';
-import { Compressor } from './effects/Compressor';
-import { ConvolutionReverb } from './effects/Reverb';
-import { HighPassFilter, LowPassFilter } from './effects/Filter';
+import { CompressorControls } from './effectControls/Compressor';
+import { ConvolutionReverbControls } from './effectControls/ConvolutionReverb';
+import { AlgorithmReverbControls } from './effectControls/Algorithm';
+import { LowPassFilterControls } from './effectControls/LowPassFilter';
+import { HighPassFilterControls } from './effectControls/HighPassFilter';
 
 (function () {
   if (!window.AudioContext) {
@@ -11,36 +13,15 @@ import { HighPassFilter, LowPassFilter } from './effects/Filter';
     alert(errorMsg);
     throw new Error(errorMsg);
   }
-
+  window.audioEffects = {};
   const audioContext = new (AudioContext || webkitAudioContext)();
   const audio = new Audio(audioContext);
 
-  document.getElementById('play-button').onclick = e => {
+  $('#play-button').on('click', e => {
     audio.play();
-  };
+  });
 
-  document.getElementById('add-comp-button').onclick = e => {
-    window.comp = new Compressor(audioContext);
-    audio.addEffect(comp);
-    document.getElementById('compressor-panel').style.display = 'block';
-  };
-  document.getElementById('add-reverb-button').onclick = e => {
-    window.reverb = new ConvolutionReverb(audioContext);
-    audio.addEffect(reverb);
-    document.getElementById('reverb-panel').style.display = 'block';
-  };
-  document.getElementById('add-low-pass-filter-button').onclick = e => {
-    window.lowPassFilter = new LowPassFilter(audioContext);
-    audio.addEffect(lowPassFilter);
-    document.getElementById('low-pass-filter-panel').style.display = 'block';
-  };
-  document.getElementById('add-high-pass-filter-button').onclick = e => {
-    window.highPassFilter = new HighPassFilter(audioContext);
-    audio.addEffect(highPassFilter);
-    document.getElementById('high-pass-filter-panel').style.display = 'block';
-  };
-
-  document.getElementById('audio-uploader').onchange = e => {
+  $('#audio-uploader').on('change', e => {
     const file = e.currentTarget.files[0];
     if (file) {
       const reader = new FileReader();
@@ -56,63 +37,44 @@ import { HighPassFilter, LowPassFilter } from './effects/Filter';
       };
       reader.readAsArrayBuffer(file);
     }
-  };
+  });
+
+  $('.add-effect-btn').on('click', function () {
+    const type = $(this).data('name');
+
+    let effectControl = null;
+    switch (type) {
+      case 'compressor':
+        effectControl = new CompressorControls(audioContext);
+        break;
+      case 'convolutionReverb':
+        effectControl = new ConvolutionReverbControls(audioContext);
+        break;
+      case 'algorithmReverb':
+        effectControl = new AlgorithmReverbControls(audioContext);
+        break;
+      case 'lowPassFilter':
+        effectControl = new LowPassFilterControls(audioContext);
+        break;
+      case 'highPassFilter':
+        effectControl = new HighPassFilterControls(audioContext);
+        break;
+      default:
+        break;
+    }
+
+    if (!effectControl || window.audioEffects[type]) {
+      return;
+    }
+
+    audio.addEffect(effectControl.effector);
+    window.audioEffects[type] = effectControl;
+
+    $(`.control-panels-wrapper[data-name="${type}"]`).append(effectControl.getControlDOM());
+  });
 
   document.getElementById('master-gain-controller').oninput = e => {
     const gain = parseInt(e.target.value) / 100;
     audio.setGain(gain * 2);
-  };
-
-  document.getElementById('threshold-controller').oninput = e => {
-    const value = parseInt(e.target.value);
-    window.comp.setThreshold(value);
-  };
-  document.getElementById('knee-controller').oninput = e => {
-    const value = parseFloat(e.target.value) / 1000;
-    window.comp.setKnee(value);
-  };
-  document.getElementById('attack-controller').oninput = e => {
-    const value = parseFloat(e.target.value) / 1000;
-    window.comp.setAttack(value / 1000);
-  };
-  document.getElementById('release-controller').oninput = e => {
-    const value = parseFloat(e.target.value);
-    window.comp.setRelease(value / 100);
-  };
-  document.getElementById('ratio-controller').oninput = e => {
-    const value = parseFloat(e.target.value);
-    window.comp.setRatio(value);
-  };
-  document.getElementById('reverb-mix-controller').oninput = e => {
-    const value = parseFloat(e.target.value) / 100;
-    window.reverb.setMix(value);
-  };
-  document.getElementById('reverb-time-controller').oninput = e => {
-    const value = parseFloat(e.target.value) / 100;
-    window.reverb.setTime(value);
-  };
-  document.getElementById('reverb-decay-controller').oninput = e => {
-    const value = parseFloat(e.target.value) / 100;
-    window.reverb.setDecay(value);
-  };
-  document.getElementById('reverb-gain-controller').oninput = e => {
-    const gain = parseFloat(e.target.value) / 100;
-    window.reverb.setGain(gain * 2);
-  };
-  document.getElementById('low-pass-filter-frequency').oninput = e => {
-    const value = parseFloat(e.target.value);
-    window.lowPassFilter.setFrequency(value);
-  };
-  document.getElementById('low-pass-q').oninput = e => {
-    const value = parseFloat(e.target.value) / 10000;
-    window.lowPassFilter.setQ(value);
-  };
-  document.getElementById('high-pass-filter-frequency').oninput = e => {
-    const value = parseFloat(e.target.value);
-    window.highPassFilter.setFrequency(value);
-  };
-  document.getElementById('high-pass-q').oninput = e => {
-    const value = parseFloat(e.target.value) / 10000;
-    window.highPassFilter.setQ(value);
   };
 })();
