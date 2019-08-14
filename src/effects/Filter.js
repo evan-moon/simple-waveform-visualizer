@@ -44,3 +44,39 @@ export class BandPassFilter extends Filter {
     super(context, options, 'bandpass');
   }
 }
+
+export class LowPassCombFilter {
+  constructor (context, options) {
+    const defaultOption = {
+      frequency: 440,
+      delay: 0.7,
+    };
+
+    this.context = context;
+    this.options = Object.assign({}, defaultOption, options);
+
+    const { frequency, delay } = this.options;
+
+    this.inputNode = this.context.createGain();
+    this.filterNode = this.context.createBiquadFilter({ type: 'lowpass', frequency });
+    this.delayNode = this.context.createDelay(delay);
+    this.gainNode = this.context.createGain();
+    this.outputNode = this.context.createGain();
+    this.gainNode.gain.setValueAtTime(0.5, context.currentTime);
+
+    this.inputNode
+      .connect(this.delayNode)
+      .connect(this.filterNode)
+      .connect(this.gainNode)
+      .connect(this.inputNode)
+      .connect(this.outputNode);
+  }
+
+  setFrequency (value) {
+    this.filterNode.frequency.setValueAtTime(value, this.context.currentTime);
+  }
+
+  setDelay (value) {
+    this.delayNode.delayTime.setValueAtTime(value, this.context.currentTime);
+  }
+}
