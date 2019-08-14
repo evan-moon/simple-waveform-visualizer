@@ -19,6 +19,7 @@ export class LowPassFilterControls extends EffectControls {
       this.effector.setQ(value);
     });
 
+    return wrapper;
   }
 }
 
