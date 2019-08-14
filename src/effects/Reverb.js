@@ -1,4 +1,4 @@
-export class Reverb {
+export class ConvolutionReverb {
   constructor (context, options) {
     const defaultOption = {
       mix: 0.5,
@@ -22,7 +22,7 @@ export class Reverb {
     this.wetNode.connect(this.outputNode);
     this.dryNode.connect(this.outputNode);
 
-    this._generateImpulse();
+    this._generateImpulseResponse();
   }
 
   setMix (value) {
@@ -34,12 +34,12 @@ export class Reverb {
 
   setTime (value) {
     this.options.time = value;
-    this._generateImpulse();
+    this._generateImpulseResponse();
   }
 
   setDecay (value) {
     this.options.decay = value;
-    this._generateImpulse();
+    this._generateImpulseResponse();
   }
 
   setGain (value) {
@@ -47,7 +47,7 @@ export class Reverb {
     this.outputNode.gain.value = value;
   }
 
-  _generateImpulse () {
+  _generateImpulseResponse () {
     const sampleRate = this.context.sampleRate;
     const length = sampleRate * this.options.time;
     const impulse = this.context.createBuffer(2, length, sampleRate);
