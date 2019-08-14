@@ -3,7 +3,7 @@ import { Audio } from './lib/Audio';
 import { WaveForm } from './lib/WaveForm';
 import { CompressorControls } from './effectControls/Compressor';
 import { ConvolutionReverbControls } from './effectControls/ConvolutionReverb';
-import { AlgorithmReverbControls } from './effectControls/Algorithm';
+import { AlgorithmReverbControls } from './effectControls/AlgorithmReverb';
 import { LowPassFilterControls } from './effectControls/LowPassFilter';
 import { HighPassFilterControls } from './effectControls/HighPassFilter';
 

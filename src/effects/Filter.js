@@ -50,19 +50,20 @@ export class LowPassCombFilter {
     const defaultOption = {
       frequency: 440,
       delay: 0.7,
+      resonance: 0.5,
     };
 
     this.context = context;
     this.options = Object.assign({}, defaultOption, options);
 
-    const { frequency, delay } = this.options;
+    const { frequency, delay, resonance } = this.options;
 
     this.inputNode = this.context.createGain();
     this.filterNode = this.context.createBiquadFilter({ type: 'lowpass', frequency });
     this.delayNode = this.context.createDelay(delay);
     this.gainNode = this.context.createGain();
     this.outputNode = this.context.createGain();
-    this.gainNode.gain.setValueAtTime(0.5, context.currentTime);
+    this.gainNode.gain.setValueAtTime(resonance, context.currentTime);
 
     this.inputNode
       .connect(this.delayNode)
@@ -80,8 +81,8 @@ export class LowPassCombFilter {
     this.delayNode.delayTime.setValueAtTime(value, this.context.currentTime);
   }
 
-  setGain (value) {
-    console.log(value);
+  setResonance (value) {
+    this.options.resonance = value;
     this.gainNode.gain.setValueAtTime(value, this.context.currentTime);
   }
 }

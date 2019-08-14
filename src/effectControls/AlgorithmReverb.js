@@ -1,5 +1,5 @@
 import { EffectControls } from './EffectControls';
-import { AlgorithmReverb } from '../effects/Reverb';
+import { AlgorithmReverb } from '../effects/AlgorithmReverb';
 
 export class AlgorithmReverbControls extends EffectControls {
   constructor (context, options) {
