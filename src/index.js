@@ -2,7 +2,7 @@ import './index.css';
 import { Audio } from './lib/Audio';
 import { WaveForm } from './lib/WaveForm';
 import { Compressor } from './effects/Compressor';
-import { Reverb } from './effects/Reverb';
+import { ConvolutionReverb } from './effects/Reverb';
 import { HighPassFilter, LowPassFilter } from './effects/Filter';
 
 (function () {
@@ -25,7 +25,7 @@ import { HighPassFilter, LowPassFilter } from './effects/Filter';
     document.getElementById('compressor-panel').style.display = 'block';
   };
   document.getElementById('add-reverb-button').onclick = e => {
-    window.reverb = new Reverb(audioContext);
+    window.reverb = new ConvolutionReverb(audioContext);
     audio.addEffect(reverb);
     document.getElementById('reverb-panel').style.display = 'block';
   };
