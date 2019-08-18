@@ -6,6 +6,7 @@ import { ConvolutionReverbControls } from './effectControls/ConvolutionReverb';
 import { AlgorithmReverbControls } from './effectControls/AlgorithmReverb';
 import { LowPassFilterControls } from './effectControls/LowPassFilter';
 import { HighPassFilterControls } from './effectControls/HighPassFilter';
+import { GraphicEQControls } from './effectControls/GraphicEQ';
 
 (function () {
   if (!window.AudioContext) {
@@ -58,6 +59,9 @@ import { HighPassFilterControls } from './effectControls/HighPassFilter';
         break;
       case 'highPassFilter':
         effectControl = new HighPassFilterControls(audioContext);
+        break;
+      case 'graphicEQ':
+        effectControl = new GraphicEQControls(audioContext);
         break;
       default:
         break;
