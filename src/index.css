@@ -21,6 +21,11 @@ h1 {
 .btn:hover {
   opacity: .8;
 }
+input[type="range"][orientation="vertical"] {
+  writing-mode: bt-lr;
+  -webkit-appearance: slider-vertical;
+  width: 16px;
+}
 
 #audio-uploader-wrapper {
   text-align: center;

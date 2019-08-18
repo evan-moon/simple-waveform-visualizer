@@ -12,9 +12,15 @@ export class EffectControls {
     this.effector = new effect(this.context, this.options);
   }
 
-  _generateRange (text, { value, max, min }, onInput) {
+  _generateRange (text, { value, max, min, vertical = false }, onInput) {
     const label = $('<label />', { text });
-    const mixRange = $('<input />', { type: 'range', value, max, min });
+    const mixRange = $('<input />', {
+      type: 'range',
+      orientation: vertical ? 'vertical' : 'horizontal',
+      value,
+      max,
+      min
+    });
     mixRange.on('input', onInput);
 
     this.controllerDOM.append(label);
