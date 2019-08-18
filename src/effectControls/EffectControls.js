@@ -4,7 +4,7 @@ export class EffectControls {
     this.options = options;
     this.effector = null;
     this.controllerDOM = $('<div />', { class: 'control-panels' });
-    this.controllerDOM.append($('<h5 />', { text: this.name }));
+    this.controllerDOM.append($('<h5 />', { text: name }));
     this.effectorName = name;
   }
 
