@@ -22,7 +22,7 @@ export class GraphicEQ {
 
   setFrequencyGain (frequency, gain) {
     const filter = this.filters.find(filter => filter.frequency === frequency);
-    filter.gainNode.gain.value = gain;
+    filter.node.gain.setValueAtTime(gain, this.context.currentTime);
   }
 
   setGain (gain) {
@@ -34,27 +34,26 @@ export class GraphicEQ {
 
     this.filters = frequencies.map((frequency, index) => {
       const filterNode = this.context.createBiquadFilter();
-      const gainNode = this.context.createGain();
-      filterNode.gain.value = -40;
-
+      filterNode.gain.value = 0;
       filterNode.frequency.setValueAtTime(frequency, this.context.currentTime);
       filterNode.Q.setValueAtTime(this.defaultQ, this.context.currentTime);
       if (index === 0) {
-        filterNode.type = 'highshelf';
-
+        filterNode.type = 'lowshelf';
       }
       else if (index === frequencies.length - 1) {
-        filterNode.type = 'lowshelf';
+        filterNode.type = 'highshelf';
       }
       else {
         filterNode.type = 'peaking';
       }
-
-      this.inputNode.connect(filterNode);
-      filterNode.connect(gainNode);
-      gainNode.connect(this.outputNode);
-
-      return { frequency, filterNode, gainNode };
+      return { frequency, node: filterNode };
     });
+
+    this.filters.reduce((prev, current) => {
+      prev.node.connect(current.node);
+      return current;
+    }, { node: this.inputNode });
+
+    this.filters[this.filters.length - 1].node.connect(this.outputNode);
   }
 }

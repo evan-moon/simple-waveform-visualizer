@@ -13,10 +13,11 @@ export class GraphicEQControls extends EffectControls {
     filters.forEach(filter => {
       this._generateRange(filter.frequency, {
         value: 0,
-        min: -300,
-        max: 300
+        min: -40,
+        max: 40,
+        vertical: true,
       }, e => {
-        const value = parseFloat(e.target.value) / 100;
+        const value = parseFloat(e.target.value);
         this.effector.setFrequencyGain(filter.frequency, value);
       });
     });
