@@ -39,12 +39,6 @@ export class HighPassFilter extends Filter {
   }
 }
 
-export class BandPassFilter extends Filter {
-  constructor (context, options) {
-    super(context, options, 'bandpass');
-  }
-}
-
 export class LowPassCombFilter {
   constructor (context, options) {
     const defaultOption = {
