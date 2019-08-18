@@ -12,7 +12,7 @@ JavaScript AudioContext API과 SVG를 사용하여 WaveForm를 렌더하고 몇�
 ### Effects
 - <strike>Compressor</strike>
 - <strike>Reverb</strike>
-- Delay
+- <strike>Delay</strike>
 - Limiter
 - <strike>Filter (LPF, HPF)</strike>
 - <strike>EQ</strike>
