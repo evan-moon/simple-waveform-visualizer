@@ -1,25 +1,20 @@
 import { LowPassCombFilter } from './Filter';
+import { Effect } from './Effect';
 
-export class AlgorithmReverb {
+export class AlgorithmReverb extends Effect {
   constructor (context, options) {
     const defaultOption = {
       mix: 0.5,
       roomSize: 3,
       dampening: 3,
     };
+    super(context, defaultOption, options);
     const sampleRate = context.sampleRate;
 
-    this.context = context;
-    this.options = Object.assign({}, defaultOption, options);
-
-    this.inputNode = this.context.createGain();
     this.wetNode = this.context.createGain();
     this.dryNode = this.context.createGain();
-
     this.splitter = this.context.createChannelSplitter(2);
     this.merger = this.context.createChannelMerger(2);
-
-    this.outputNode = context.createGain();
 
     this.combFilters = [1557, 1617, 1491, 1422, 1277, 1356, 1188, 1116].map(delayPerSecond => {
       return new LowPassCombFilter(this.context, {

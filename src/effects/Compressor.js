@@ -1,4 +1,6 @@
-export class Compressor {
+import { Effect } from './Effect';
+
+export class Compressor extends Effect {
   constructor (context, options) {
     const defaultOption = {
       threshold: -24,
@@ -7,8 +9,7 @@ export class Compressor {
       release: 0.250,
       ratio: 12,
     };
-    this.context = context;
-    this.options = Object.assign({}, defaultOption, options);
+    super(context, defaultOption, options);
     this.compressorNode = context.createDynamicsCompressor();
 
     const t = this.context.currentTime;
@@ -18,9 +19,8 @@ export class Compressor {
     this.compressorNode.release.setValueAtTime(this.options.release, t);
     this.compressorNode.ratio.setValueAtTime(this.options.ratio, t);
 
-    this.inputNode = this.compressorNode;
-    this.outputNode = this.context.createGain();
-    this.inputNode.connect(this.outputNode);
+    this.inputNode.connect(this.compressorNode);
+    this.compressorNode.connect(this.outputNode);
   }
 
   setThreshold (value) {

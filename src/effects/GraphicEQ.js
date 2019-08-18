@@ -1,7 +1,8 @@
-export class GraphicEQ {
-  constructor (context) {
-    this.context = context;
+import { Effect } from './Effect';
 
+export class GraphicEQ extends Effect {
+  constructor (context) {
+    super(context);
     this.frequencies = [
       25, 31, 40, 50, 63, 80, 100, 125, 160, 200,
       250, 315, 400, 500, 630, 800, 1000, 1250, 1600, 2000,
@@ -9,10 +10,6 @@ export class GraphicEQ {
     ];
     this.defaultQ = 1;
     this.filters = [];
-
-    this.inputNode = this.context.createGain();
-    this.outputNode = this.context.createGain();
-
     this._generateFilter();
   }
 

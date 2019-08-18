@@ -1,20 +1,20 @@
-class Filter {
+import { Effect } from './Effect';
+
+class Filter extends Effect {
   constructor (context, options, type) {
     const defaultOption = {
       frequency: 350,
       q: 1,
     };
-    this.context = context;
-    this.options = Object.assign({}, defaultOption, options);
+    super(context, defaultOption, options);
 
     this.filterNode = context.createBiquadFilter();
     this.filterNode.type = type;
     this.filterNode.frequency.setValueAtTime(this.options.frequency, this.context.currentTime);
     this.filterNode.Q.setValueAtTime(this.options.q, this.context.currentTime);
 
-    this.inputNode = this.filterNode;
-    this.outputNode = this.context.createGain();
-    this.inputNode.connect(this.outputNode);
+    this.inputNode.connect(this.filterNode);
+    this.filterNode.connect(this.outputNode);
   }
 
   setFrequency (value) {

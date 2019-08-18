@@ -1,18 +1,17 @@
-export class ConvolutionReverb {
+import { Effect } from './Effect';
+
+export class ConvolutionReverb extends Effect {
   constructor (context, options) {
     const defaultOption = {
       mix: 0.5,
       time: 0.01,
       decay: 0.01,
     };
-    this.context = context;
-    this.options = Object.assign({}, defaultOption, options);
+    super(context, defaultOption, options);
 
-    this.inputNode = context.createGain();
     this.reverbNode = context.createConvolver();
     this.wetNode = context.createGain();
     this.dryNode = context.createGain();
-    this.outputNode = context.createGain();
 
     this.inputNode.connect(this.reverbNode);
     this.inputNode.connect(this.dryNode);
@@ -40,11 +39,6 @@ export class ConvolutionReverb {
   setDecay (value) {
     this.options.decay = value;
     this._generateImpulseResponse();
-  }
-
-  setGain (value) {
-    this.options.gain = value;
-    this.outputNode.gain.value = value;
   }
 
   _generateImpulseResponse () {
