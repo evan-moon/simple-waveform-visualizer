@@ -24,6 +24,9 @@ export class Delay extends Effect {
     this.inputNode.connect(this.delayNode);
     this.delayNode.connect(this.wetNode);
     this.wetNode.connect(this.outputNode);
+
+    this.setTime(this.options.time);
+    this.setFeedback(this.options.feedback);
   }
 
   setMix (value) {

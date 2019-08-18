@@ -7,6 +7,7 @@ import { AlgorithmReverbControls } from './effectControls/AlgorithmReverb';
 import { LowPassFilterControls } from './effectControls/LowPassFilter';
 import { HighPassFilterControls } from './effectControls/HighPassFilter';
 import { GraphicEQControls } from './effectControls/GraphicEQ';
+import { DelayControls } from './effectControls/Delay';
 
 (function () {
   if (!window.AudioContext) {
@@ -62,6 +63,9 @@ import { GraphicEQControls } from './effectControls/GraphicEQ';
         break;
       case 'graphicEQ':
         effectControl = new GraphicEQControls(audioContext);
+        break;
+      case 'delay':
+        effectControl = new DelayControls(audioContext);
         break;
       default:
         break;

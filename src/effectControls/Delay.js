@@ -14,8 +14,8 @@ export class DelayControls extends EffectControls {
       const value = parseFloat(e.target.value) / 100;
       this.effector.setMix(value);
     });
-    this._generateRange('Time', { value: 0.3, min: 0, max: 180 }, e => {
-      const value = parseFloat(e.target.value);
+    this._generateRange('Time', { value: 30, min: 0, max: 100 }, e => {
+      const value = parseFloat(e.target.value) / 100;
       this.effector.setTime(value);
     });
     this._generateRange('Feedback', { value: 50, min: 0, max: 100 }, e => {
