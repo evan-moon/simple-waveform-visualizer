@@ -15,7 +15,7 @@ JavaScript AudioContext API과 SVG를 사용하여 WaveForm를 렌더하고 몇�
 - Delay
 - Limiter
 - <strike>Filter (LPF, HPF)</strike>
-- EQ
+- <strike>EQ</strike>
 - Distortion
 - Tremolo
 ### Framework
