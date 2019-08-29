@@ -86,13 +86,15 @@ export class Audio {
   }
 
   addEffect (effect) {
-    const prevNode = this.effects.length > 0
-      ? this.effects[this.effects.length - 1]
+    const lastNode = this.effects.length > 0
+      ? this.effects[this.effects.length - 1].outputNode
       : this.sourceBuffer;
 
-    prevNode.disconnect();
-    prevNode.connect(effect.inputNode);
+    lastNode.disconnect();
+    lastNode.connect(effect.inputNode);
     effect.outputNode.connect(this.gainNode);
+
+    this.effects.push(effect);
   }
 
   removeEffect (effect) {
@@ -103,7 +105,7 @@ export class Audio {
 
     const prevNode = index === 0
       ? this.sourceBuffer
-      : this.effects[index - 1];
+      : this.effects[index - 1].outputNode;
     prevNode.disconnect();
 
     const effector = this.effects[index];
