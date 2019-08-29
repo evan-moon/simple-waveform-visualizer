@@ -8,6 +8,7 @@ import { LowPassFilterControls } from './effectControls/LowPassFilter';
 import { HighPassFilterControls } from './effectControls/HighPassFilter';
 import { GraphicEQControls } from './effectControls/GraphicEQ';
 import { DelayControls } from './effectControls/Delay';
+import { DistortionControls } from './effectControls/Distortion';
 
 (function () {
   if (!window.AudioContext) {
@@ -66,6 +67,9 @@ import { DelayControls } from './effectControls/Delay';
         break;
       case 'delay':
         effectControl = new DelayControls(audioContext);
+        break;
+      case 'distortion':
+        effectControl = new DistortionControls(audioContext);
         break;
       default:
         break;
