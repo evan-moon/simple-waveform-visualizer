@@ -13,11 +13,10 @@ JavaScript AudioContext API과 SVG를 사용하여 WaveForm를 렌더하고 몇�
 - <strike>Compressor</strike>
 - <strike>Reverb</strike>
 - <strike>Delay</strike>
-- Limiter
 - <strike>Filter (LPF, HPF)</strike>
 - <strike>EQ</strike>
 - <strike>Distortion</strike>
-- Tremolo
+- <strike>Tremolo</strike>
 ### Framework
 - Vue? React? 뭘로 할지 고민 중... 일단 모듈 개발부터 대충 끝내놓고 도입할 예정
 
