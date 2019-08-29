@@ -15,8 +15,6 @@ export class DistortionControls extends EffectControls {
       this.effector.setGain(value);
     });
 
-    console.log(wrapper);
-
     return wrapper;
   }
 }

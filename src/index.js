@@ -9,6 +9,7 @@ import { HighPassFilterControls } from './effectControls/HighPassFilter';
 import { GraphicEQControls } from './effectControls/GraphicEQ';
 import { DelayControls } from './effectControls/Delay';
 import { DistortionControls } from './effectControls/Distortion';
+import { TremoloControls } from './effectControls/Tremolo';
 
 (function () {
   if (!window.AudioContext) {
@@ -70,6 +71,9 @@ import { DistortionControls } from './effectControls/Distortion';
         break;
       case 'distortion':
         effectControl = new DistortionControls(audioContext);
+        break;
+      case 'tremolo':
+        effectControl = new TremoloControls(audioContext);
         break;
       default:
         break;
