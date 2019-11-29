@@ -3,6 +3,7 @@ export class Audio {
     if (!context) {
       throw new Error('There is no AudioContext');
     }
+    this.id = new Date().getTime();
     this.audioContext = context;
     this.audioBuffer = null;
     this.sampleRate = 0;

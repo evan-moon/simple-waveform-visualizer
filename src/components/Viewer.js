@@ -1,7 +1,28 @@
 import React from 'react';
+import { connect } from 'react-redux';
+import Track from 'src/components/Track';
 
-export default function Viewer () {
+const mapStateToProps = ({ tracks }) => {
+  return {
+    tracks,
+  };
+};
+
+function Viewer (props) {
+  console.log(props.tracks);
   return (
-    <div>Viewer</div>
+    <div>
+      <ul>
+        {props.tracks.map((track, index) => {
+          return (
+            <li data-track-id={track.id} data-track-index={index} key={track.id}>
+              <Track track={track} />
+            </li>
+          );
+        })}
+      </ul>
+    </div>
   )
 }
+
+export default connect(mapStateToProps)(Viewer);

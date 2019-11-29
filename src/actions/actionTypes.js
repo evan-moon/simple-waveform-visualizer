@@ -1,2 +1,2 @@
-export const SET_AUDIO = 'SET_AUDIO';
-export const DESTROY_AUDIO = 'DESTROY_AUDIO';
+export const ADD_AUDIO_TRACK = 'ADD_AUDIO_TRACK';
+export const REMOVE_AUDIO_TRACK = 'REMOVE_AUDIO_TRACK';
