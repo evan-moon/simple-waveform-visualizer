@@ -1,5 +1,5 @@
 import { EffectControls } from './EffectControls';
-import { HighPassFilter } from '../effects/Filter';
+import { HighPassFilter } from '../../lib/effects/Filter';
 
 export class HighPassFilterControls extends EffectControls {
   constructor (context, options) {

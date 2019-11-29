@@ -1,6 +1,6 @@
 import './index.css';
-import { Audio } from './lib/Audio';
-import { WaveForm } from './lib/WaveForm';
+import { Audio } from '../lib/Audio';
+import { WaveForm } from '../lib/WaveForm';
 import { CompressorControls } from './effectControls/Compressor';
 import { ConvolutionReverbControls } from './effectControls/ConvolutionReverb';
 import { AlgorithmReverbControls } from './effectControls/AlgorithmReverb';

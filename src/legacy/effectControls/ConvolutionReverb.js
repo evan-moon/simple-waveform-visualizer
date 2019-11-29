@@ -1,5 +1,5 @@
 import { EffectControls } from './EffectControls';
-import { ConvolutionReverb } from '../effects/ConvolutionReverb';
+import { ConvolutionReverb } from '../../lib/effects/ConvolutionReverb';
 
 export class ConvolutionReverbControls extends EffectControls {
   constructor (context, options) {

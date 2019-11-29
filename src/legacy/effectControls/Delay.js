@@ -1,5 +1,5 @@
 import { EffectControls } from './EffectControls';
-import { Delay } from '../effects/Delay';
+import { Delay } from '../../lib/effects/Delay';
 
 export class DelayControls extends EffectControls {
   constructor (context, options) {

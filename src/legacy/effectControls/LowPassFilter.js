@@ -1,5 +1,5 @@
 import { EffectControls } from './EffectControls';
-import { LowPassFilter } from '../effects/Filter';
+import { LowPassFilter } from '../../lib/effects/Filter';
 
 export class LowPassFilterControls extends EffectControls {
   constructor (context, options) {

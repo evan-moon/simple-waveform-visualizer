@@ -1,5 +1,5 @@
 import { EffectControls } from './EffectControls';
-import { GraphicEQ } from '../effects/GraphicEQ';
+import { GraphicEQ } from '../../lib/effects/GraphicEQ';
 
 export class GraphicEQControls extends EffectControls {
   constructor (context) {

@@ -1,5 +1,5 @@
 import { EffectControls } from './EffectControls';
-import { Compressor } from '../effects/Compressor';
+import { Compressor } from '../../lib/effects/Compressor';
 
 export class CompressorControls extends EffectControls {
   constructor (context, options) {

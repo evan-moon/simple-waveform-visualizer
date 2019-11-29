@@ -1,5 +1,5 @@
 import { EffectControls } from './EffectControls';
-import { Distortion } from '../effects/Distortion';
+import { Distortion } from '../../lib/effects/Distortion';
 
 export class DistortionControls extends EffectControls {
   constructor (context, options) {

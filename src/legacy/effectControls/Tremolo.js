@@ -1,5 +1,5 @@
 import { EffectControls } from './EffectControls';
-import { Tremolo } from '../effects/Tremolo';
+import { Tremolo } from '../../lib/effects/Tremolo';
 
 export class TremoloControls extends EffectControls {
   constructor (context, options) {
