@@ -1,49 +1,38 @@
 {
-  "name": "waveform-visualizer",
-  "version": "1.0.0",
+  "name": "web-audio-editor",
   "description": "waveform visualization test",
-  "main": "index.js",
+  "author": "Evan Moon",
+  "version": "0.1.0",
+  "private": true,
+  "dependencies": {
+    "normalize.css": "^8.0.1",
+    "react": "^16.12.0",
+    "react-dom": "^16.12.0",
+    "react-scripts": "3.2.0"
+  },
   "scripts": {
-    "start": "node server.js",
-    "dev": "webpack-dev-server --env dev --mode none",
-    "build": "webpack --env prod --mode production",
-    "test": "test"
+    "start": "react-scripts start",
+    "build": "react-scripts build",
+    "test": "react-scripts test",
+    "eject": "react-scripts eject"
+  },
+  "eslintConfig": {
+    "extends": "react-app"
   },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/evan-moon/waveform-visualizer.git"
   },
-  "keywords": [
-    "audio",
-    "waveform",
-    "sample"
-  ],
-  "author": "Evan Moon",
-  "license": "MIT",
-  "bugs": {
-    "url": "https://github.com/evan-moon/waveform-visualizer/issues"
-  },
-  "homepage": "https://github.com/evan-moon/waveform-visualizer#readme",
-  "dependencies": {
-    "compression": "^1.7.4",
-    "express": "^4.17.1",
-    "express-history-api-fallback": "^2.2.1"
-  },
-  "devDependencies": {
-    "@babel/core": "^7.5.0",
-    "babel-loader": "^8.0.6",
-    "babel-preset-env": "^1.7.0",
-    "clean-webpack-plugin": "^3.0.0",
-    "css-loader": "^3.0.0",
-    "html-webpack-plugin": "^3.2.0",
-    "style-loader": "^0.23.1",
-    "webpack": "^4.35.2",
-    "webpack-cli": "^3.3.5",
-    "webpack-dev-server": "^3.7.2",
-    "webpack-merge": "^4.2.1"
-  },
-  "engines": {
-    "node": ">= 10.0.0",
-    "npm": ">= 3.0.0"
+  "browserslist": {
+    "production": [
+      ">0.2%",
+      "not dead",
+      "not op_mini all"
+    ],
+    "development": [
+      "last 1 chrome version",
+      "last 1 firefox version",
+      "last 1 safari version"
+    ]
   }
 }

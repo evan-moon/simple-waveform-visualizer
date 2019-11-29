@@ -1,4 +1,4 @@
-# simple-waveform-visualizer
+# web-audio-editor
 JavaScript AudioContext API과 SVG를 사용하여 WaveForm를 렌더하고 몇가지 이펙터를 간단히 만들어보는 실험실.
 
 ## Live Demo
@@ -17,8 +17,6 @@ JavaScript AudioContext API과 SVG를 사용하여 WaveForm를 렌더하고 몇�
 - <strike>EQ</strike>
 - <strike>Distortion</strike>
 - <strike>Tremolo</strike>
-### Framework
-- Vue? React? 뭘로 할지 고민 중... 일단 모듈 개발부터 대충 끝내놓고 도입할 예정
 
 ## Usage
 ```bash
