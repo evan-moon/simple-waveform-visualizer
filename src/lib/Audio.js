@@ -79,7 +79,7 @@ export class Audio {
   }
 
   reset () {
-    this.audioContext = new (AudioContext || webkitAudioContext)();
+    this.audioContext = new AudioContext();
     this.audioBuffer = null;
     this.sampleRate = 0;
     this.peaks = [];
