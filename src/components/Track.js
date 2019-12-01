@@ -1,5 +1,18 @@
 import React, { useEffect, useRef } from 'react';
+import styled from 'styled-components';
 import { WaveForm } from 'lib/WaveForm';
+
+const StyledTrack = styled.div`
+  svg {
+    stroke: #7f00ff;
+    width: 100%;
+    height: 20vh;
+  }
+  g {
+    width: 100%;
+    height: 20vh;
+  }
+`;
 
 export default function Track ({ track }) {
   const svgRef = useRef();
@@ -11,10 +24,10 @@ export default function Track ({ track }) {
   }, [svgRef, pathRef]);
 
   return (
-    <div>
+    <StyledTrack>
       <svg ref={svgRef} preserveAspectRatio="none">
         <g ref={pathRef}></g>
       </svg>
-    </div>
+    </StyledTrack>
   );
 }

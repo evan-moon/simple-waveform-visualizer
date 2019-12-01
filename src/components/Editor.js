@@ -3,6 +3,7 @@ import styled from 'styled-components';
 import { Container, Row, Col } from 'react-bootstrap';
 import Toolbar from 'src/components/Toolbar';
 import Viewer from 'src/components/Viewer';
+import Header from 'src/components/Header';
 
 const StyledContainer = styled.div`
   > .container-fluid {
@@ -14,6 +15,11 @@ export default function Editor () {
   return (
     <StyledContainer>
       <Container fluid={true}>
+        <Row>
+          <Col xs={12}>
+            <Header />
+          </Col>
+        </Row>
         <Row noGutters={true}>
           <Col xs={'auto'}>
             <Toolbar />
