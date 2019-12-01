@@ -46,9 +46,23 @@ function Header (props) {
     reader.readAsArrayBuffer(file);
   }
 
+  function onClickPlayButton () {
+    console.log('play!');
+  }
+
+  function onClickStopButton () {
+    console.log('stop!');
+  }
+
   return (
     <StyledHeader>
       <Button onClick={onClickUploadButton}>+</Button>
+      <Button onClick={onClickPlayButton}>
+        <i className="fas fa-play"></i>
+      </Button>
+      <Button onClick={onClickStopButton}>
+        <i className="fas fa-stop"></i>
+      </Button>
       <input ref={fileUploaderRef} onChange={onChangeFileUploader} type="file" style={{ display: 'none' }} />
     </StyledHeader>
   );
