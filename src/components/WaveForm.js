@@ -14,14 +14,13 @@ const StyledTrack = styled.div`
   }
 `;
 
-export default function Track ({ track }) {
+export default function WaveFormViewer ({ track }) {
   const svgRef = useRef();
   const pathRef = useRef();
-  const waveForm = new WaveForm(track);
-
   useEffect(() => {
+    const waveForm = new WaveForm(track);
     waveForm.draw({ svgBox: svgRef.current, pathGroup: pathRef.current });
-  }, [svgRef, pathRef]);
+  }, [svgRef, pathRef, track]);
 
   return (
     <StyledTrack>

@@ -1,17 +1,16 @@
 import React, { useRef } from 'react';
-import { bindActionCreators } from 'redux';
 import styled from 'styled-components';
 import { connect } from 'react-redux';
 import { addAudioTrack } from 'src/actions';
 import { Button } from 'react-bootstrap';
-import { Audio } from 'lib/Audio';
+import { AudioTrack } from 'lib/Tracks/AudioTrack';
 
 const mapStateToProps = ({ audioContext }) => {
   return { audioContext };
 };
 
-const mapDispatchToProps = (dispatch) => {
-  return bindActionCreators({ addAudioTrack }, dispatch);
+const mapDispatchToProps = {
+  addAudioTrack
 };
 
 const StyledHeader = styled.header`
@@ -38,7 +37,7 @@ function Header (props) {
 
     const reader = new FileReader();
     reader.onload = onloadEvent => {
-      const audio = new Audio(props.audioContext);
+      const audio = new AudioTrack(props.audioContext);
       audio.setAudio(onloadEvent.target.result).then(() => {
         props.addAudioTrack(audio);
       });

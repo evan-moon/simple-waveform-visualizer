@@ -1,7 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 import { connect } from 'react-redux';
-import { Audio } from 'lib/Audio';
+import TrackController from 'components/TrackController';
 
 const mapStateToProps = ({ tracks }) => {
   return {
@@ -30,7 +30,7 @@ function Toolbar (props) {
         {props.tracks.map(track => {
           return (
             <li key={track.id}>
-              <p>{track.id}</p>
+              <TrackController track={track} />
             </li>
           );
         })}

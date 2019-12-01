@@ -1,7 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 import { connect } from 'react-redux';
-import Track from 'src/components/Track';
+import WaveFormViewer from 'src/components/WaveForm';
 
 const mapStateToProps = ({ tracks }) => {
   return {
@@ -28,7 +28,7 @@ function Viewer (props) {
         {props.tracks.map((track, index) => {
           return (
             <li data-track-id={track.id} data-track-index={index} key={track.id}>
-              <Track track={track} />
+              <WaveFormViewer track={track} />
             </li>
           );
         })}
