@@ -9,7 +9,6 @@ const mapStateToProps = ({ tracks }) => {
 };
 
 function Viewer (props) {
-  console.log(props.tracks);
   return (
     <div>
       <ul>

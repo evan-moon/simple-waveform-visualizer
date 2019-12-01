@@ -1,6 +1,6 @@
-import styles from './Toolbar.module.css';
 import React, { useRef } from 'react';
 import { bindActionCreators } from 'redux';
+import styled from 'styled-components';
 import { connect } from 'react-redux';
 import { addAudioTrack } from 'src/actions';
 import { Button } from 'react-bootstrap';
@@ -13,6 +13,10 @@ const mapStateToProps = ({ audioContext }) => {
 const mapDispatchToProps = (dispatch) => {
   return bindActionCreators({ addAudioTrack }, dispatch);
 };
+
+const StyledAside = styled.aside`
+  width: 300px;
+`;
 
 function Toolbar (props) {
   const fileUploaderRef = useRef();
@@ -38,10 +42,10 @@ function Toolbar (props) {
   }
 
   return (
-    <aside className={styles.toolbar}>
+    <StyledAside>
       <Button onClick={onClickUploadButton}>Add Audio</Button>
       <input ref={fileUploaderRef} onChange={onChangeFileUploader} type="file" style={{ display: 'none' }} />
-    </aside>
+    </StyledAside>
   );
 }
 

@@ -1,18 +1,16 @@
 export class WaveForm {
  constructor (audio) {
-   console.log(audio.constructor.name);
    if (!audio) {
      throw new Error('WaveForm needs Audio object');
    }
    this.audio = audio;
  }
 
- draw ({ svgBoxId, pathGroupId }) {
-   const waveFormBox = document.getElementById(svgBoxId);
-   const pathGroup = document.getElementById(pathGroupId);
+ draw ({ svgBox, pathGroup }) {
    const sampleRate = this.audio.sampleRate;
+   console.log(svgBox, pathGroup);
 
-   waveFormBox.setAttribute('viewBox', `0 -1 ${sampleRate} 2`);
+   svgBox.setAttribute('viewBox', `0 -1 ${sampleRate} 2`);
 
    const audioBuffer = this.audio.audioBuffer;
    const peaks = this.audio.peaks;
