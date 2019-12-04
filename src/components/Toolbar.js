@@ -30,7 +30,7 @@ function Toolbar (props) {
         {props.tracks.map(track => {
           return (
             <li key={track.id}>
-              <TrackController track={track} />
+              <TrackController trackId={track.id} trackName={track.name} />
             </li>
           );
         })}

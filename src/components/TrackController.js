@@ -10,15 +10,15 @@ const mapDispatchToProps = {
   updateTrackName
 };
 
-function TrackController ({ track }) {
+function TrackController (props) {
   function onChangeTrackName (e) {
     console.log(e.target.value);
-    // updateTrackName(e.target.value);
+    props.updateTrackName(props.trackId, e.target.value);
   }
 
   return (
-    <StyledTrackController data-track-id={track.id}>
-      <input type="text" value={track.name} onChange={onChangeTrackName} />
+    <StyledTrackController data-track-id={props.trackId}>
+      <input type="text" value={props.trackName} onChange={onChangeTrackName} />
     </StyledTrackController>
   );
 }
