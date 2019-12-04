@@ -5,11 +5,14 @@ const initialState = {
   tracks: [],
 };
 
-// C사가 쓰는 리듀서 나누는 방법
 const trackReducer = (state, action) => {
   switch (action.type) {
     case types.ADD_AUDIO_TRACK:
       return [...state, action.payload.audioTrack];
+    case types.REMOVE_ALL_TRACKS:
+      return [];
+    case types.REMOVE_TRACK:
+      return state.filter(track => track.id !== action.payload.trackId);
     case types.UPDATE_TRACK_NAME:
       const targetTrack = state.find(track => track.id === action.payload.trackId);
       targetTrack.setName(action.payload.trackName);
@@ -20,13 +23,10 @@ const trackReducer = (state, action) => {
 
 const rootReducer = (state = initialState, action) => {
   switch (action.type) {
-    case types.REMOVE_AUDIO_TRACK:
-      return {
-        ...state,
-        audio: null,
-      };
     case types.ADD_AUDIO_TRACK:
     case types.UPDATE_TRACK_NAME:
+    case types.REMOVE_ALL_TRACKS:
+    case types.REMOVE_TRACK:
       return {
         ...state,
         tracks: trackReducer(state.tracks, action),
