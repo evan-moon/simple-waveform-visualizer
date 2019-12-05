@@ -1,16 +1,10 @@
-import React, { useRef } from 'react';
+import React from 'react';
 import styled from 'styled-components';
 import { connect } from 'react-redux';
-import { addAudioTrack, playAllTracks, stopAllTracks } from 'src/actions';
+import { playAllTracks, stopAllTracks } from 'src/actions';
 import { Button } from 'react-bootstrap';
-import { AudioTrack } from 'lib/Tracks/AudioTrack';
-
-const mapStateToProps = ({ audioContext }) => {
-  return { audioContext };
-};
 
 const mapDispatchToProps = {
-  addAudioTrack,
   playAllTracks,
   stopAllTracks,
 };
@@ -25,50 +19,24 @@ const StyledHeader = styled.header`
 `;
 
 function Header (props) {
-  const fileUploaderRef = useRef();
-
-  function onClickUploadButton () {
-    fileUploaderRef.current.click();
-  }
-
-  function onChangeFileUploader (e) {
-    const file = e.currentTarget.files[0];
-    if (!file) {
-      return;
-    }
-
-    const reader = new FileReader();
-    reader.onload = onloadEvent => {
-      const audio = new AudioTrack(props.audioContext);
-      audio.setAudio(onloadEvent.target.result).then(() => {
-        props.addAudioTrack(audio);
-      });
-    };
-    reader.readAsArrayBuffer(file);
-  }
-
   function onClickPlayButton () {
-    console.log('play!');
     props.playAllTracks();
   }
 
   function onClickStopButton () {
-    console.log('stop!');
     props.stopAllTracks();
   }
 
   return (
     <StyledHeader>
-      <Button onClick={onClickUploadButton}>+</Button>
       <Button onClick={onClickPlayButton}>
         <i className="fas fa-play"></i>
       </Button>
       <Button onClick={onClickStopButton}>
         <i className="fas fa-stop"></i>
       </Button>
-      <input ref={fileUploaderRef} onChange={onChangeFileUploader} type="file" style={{ display: 'none' }} />
     </StyledHeader>
   );
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(Header);
+export default connect(null, mapDispatchToProps)(Header);
