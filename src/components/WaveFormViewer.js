@@ -4,9 +4,10 @@ import { WaveForm } from 'lib/WaveForm';
 
 const StyledTrack = styled.div`
   svg {
-    stroke: #7f00ff;
+    stroke: #ffffff;
     width: 100%;
     height: 20vh;
+    background-color: ${props => props.color};
   }
   g {
     width: 100%;
@@ -14,7 +15,7 @@ const StyledTrack = styled.div`
   }
 `;
 
-export default function WaveFormViewer ({ track }) {
+export default function WaveFormViewer ({ track, color }) {
   const svgRef = useRef();
   const pathRef = useRef();
   useEffect(() => {
@@ -23,7 +24,7 @@ export default function WaveFormViewer ({ track }) {
   }, [svgRef, pathRef, track]);
 
   return (
-    <StyledTrack>
+    <StyledTrack color={color}>
       <svg ref={svgRef} preserveAspectRatio="none">
         <g ref={pathRef}></g>
       </svg>

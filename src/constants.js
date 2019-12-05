@@ -1,0 +1,1 @@
+export const WaveFormColors = ['darkturquoise', 'blueviolet ', 'brown', 'coral', 'crimson', 'darkblue', 'darkgreen'];
