@@ -41,3 +41,11 @@ export const removeEffect = (trackId, effectId) => {
     payload: { trackId, effectId },
   };
 };
+
+export const playAllTracks = () => {
+  return { type: types.PLAY_ALL_TRACKS };
+};
+
+export const stopAllTracks = () => {
+  return { type: types.STOP_ALL_TRACKS };
+};

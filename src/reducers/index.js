@@ -31,6 +31,16 @@ const trackReducer = (state, action) => {
         .find(track => track.id === action.payload.trackId)
         .removeEffect(action.payload.effectId);
       return [...state];
+    case types.PLAY_ALL_TRACKS:
+      return state.map(track => {
+        track.play();
+        return track;
+      });
+    case types.STOP_ALL_TRACKS:
+      return state.map(track => {
+        track.stop();
+        return track;
+      });
     default: break;
   }
 };
@@ -43,6 +53,8 @@ const rootReducer = (state = initialState, action) => {
     case types.ADD_EFFECT:
     case types.CHANGE_EFFECT:
     case types.REMOVE_EFFECT:
+    case types.PLAY_ALL_TRACKS:
+    case types.STOP_ALL_TRACKS:
       return {
         ...state,
         tracks: trackReducer(state.tracks, action),

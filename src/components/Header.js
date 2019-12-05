@@ -1,7 +1,7 @@
 import React, { useRef } from 'react';
 import styled from 'styled-components';
 import { connect } from 'react-redux';
-import { addAudioTrack } from 'src/actions';
+import { addAudioTrack, playAllTracks, stopAllTracks } from 'src/actions';
 import { Button } from 'react-bootstrap';
 import { AudioTrack } from 'lib/Tracks/AudioTrack';
 
@@ -10,7 +10,9 @@ const mapStateToProps = ({ audioContext }) => {
 };
 
 const mapDispatchToProps = {
-  addAudioTrack
+  addAudioTrack,
+  playAllTracks,
+  stopAllTracks,
 };
 
 const StyledHeader = styled.header`
@@ -47,10 +49,12 @@ function Header (props) {
 
   function onClickPlayButton () {
     console.log('play!');
+    props.playAllTracks();
   }
 
   function onClickStopButton () {
     console.log('stop!');
+    props.stopAllTracks();
   }
 
   return (

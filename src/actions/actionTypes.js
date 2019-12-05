@@ -5,3 +5,6 @@ export const UPDATE_TRACK_NAME = 'UPDATE_TRACK_NAME';
 export const ADD_EFFECT = 'ADD_EFFECT';
 export const CHANGE_EFFECT = 'CHANGE_EFFECT';
 export const REMOVE_EFFECT = 'REMOVE_EFFECT';
+
+export const PLAY_ALL_TRACKS = 'PLAY_ALL_TRACKS';
+export const STOP_ALL_TRACKS = 'STOP_ALL_TRACKS';

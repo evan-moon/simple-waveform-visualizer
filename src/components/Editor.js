@@ -15,7 +15,7 @@ export default function Editor () {
   return (
     <StyledContainer>
       <Container fluid={true}>
-        <Row>
+        <Row noGutters={true}>
           <Col xs={12}>
             <Header />
           </Col>

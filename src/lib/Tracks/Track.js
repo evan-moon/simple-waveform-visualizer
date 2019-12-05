@@ -7,6 +7,7 @@ export class Track {
     this.effects = [];
     this.sourceBuffer = this.audioContext.createBufferSource();
     this.effects = [];
+    this.isPlaying = false;
   }
 
   setName (name) {
@@ -22,8 +23,14 @@ export class Track {
   }
 
   play () {
-    this.sourceBuffer.loop = true;
+    this.sourceBuffer.loop = true; // For Test
     this.sourceBuffer.start();
+    this.isPlaying = true;
+  }
+
+  stop () {
+    this.sourceBuffer.stop();
+    this.isPlaying = false;
   }
 
   addEffect (effect) {
