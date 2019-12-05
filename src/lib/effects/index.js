@@ -5,6 +5,7 @@ import { Delay } from './Delay';
 import { LowPassFilter, HighPassFilter, LowPassCombFilter } from './Filter';
 import { GraphicEQ } from './GraphicEQ';
 import { Tremolo } from './Tremolo';
+import { fromTitleCaseToStartCase } from 'src/utils';
 
 export const Effects = [
   Compressor,
@@ -19,5 +20,5 @@ export const Effects = [
 ];
 
 export const EffectsName = Effects.map(effect => {
-  return effect.name.replace(/(.)([A-Z])/g, '$1 $2');
+  return fromTitleCaseToStartCase(effect.name);
 });
