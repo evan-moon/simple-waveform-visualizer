@@ -24,7 +24,10 @@ const trackReducer = (state, action) => {
         .addEffect(action.payload.effector);
       return [...state];
     case types.CHANGE_EFFECT:
-      return state;
+      state
+        .find(track => track.id === action.payload.trackId)
+        .changeEffect(action.payload.effectId, action.payload.newEffector);
+      return [...state];
     case types.REMOVE_EFFECT:
       state
         .find(track => track.id === action.payload.trackId)
