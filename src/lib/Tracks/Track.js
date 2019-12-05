@@ -39,7 +39,22 @@ export class Track {
   }
 
   changeEffect (effectId, newEffect) {
+    const originEffectorIndex = this.effects.findIndex(e => e.id === effectId);
+    const originEffector = this.effects[originEffectorIndex];
 
+    const prevNode = originEffectorIndex === 0
+      ? this.sourceBuffer
+      : this.effects[originEffectorIndex - 1].outputNode;
+    const targetNode = this.effects[originEffectorIndex + 1] || this.gainNode;
+
+    prevNode.disconnect();
+    originEffector.outputNode.disconnect();
+
+    prevNode.connect(newEffect.inputNode);
+    newEffect.outputNode.connect(targetNode);
+
+    this.effects[originEffectorIndex] = newEffect;
+    this.effects = [...this.effects];
   }
 
   removeEffect (effectId) {
