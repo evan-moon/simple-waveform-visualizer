@@ -14,13 +14,14 @@ const StyledAside = styled.aside`
   height: 100vh;
   box-shadow: 0 0 3px 0 rgba(0, 0, 0, 0.2);
   background-color: #333333;
-  ul {
+  > ul {
     margin: 0;
     padding: 0;
+    > li {
+      height: 20vh;
+    }
   }
-  li {
-    height: 20vh;
-  }
+  
 `;
 
 function Toolbar (props) {
@@ -30,7 +31,10 @@ function Toolbar (props) {
         {props.tracks.map(track => {
           return (
             <li key={track.id}>
-              <TrackController trackId={track.id} trackName={track.name} />
+              <TrackController
+                trackId={track.id}
+                trackName={track.name}
+                effects={track.effects} />
             </li>
           );
         })}
