@@ -36,7 +36,7 @@ export const addEffect = (trackId, effector) => {
 
 export const changeEffect = (trackId, effectId, newEffector) => {
   return {
-    type: types.ADD_EFFECT,
+    type: types.CHANGE_EFFECT,
     payload: { trackId, effectId, newEffector },
   };
 };
