@@ -9,9 +9,6 @@ const StyledTrackController = styled.div`
   ul.effect-list {
     margin: 0;
     padding: 0;
-    > li > button {
-      width: 100%;
-    }
   }
 `;
 
@@ -37,8 +34,10 @@ function TrackController (props) {
   }
 
   function changeEffect (eventKey) {
-    const Effector = Effects[eventKey.newEffectIndex];
-    props.changeEffect(props.trackId, eventKey.effectId, new Effector(props.audioContext));
+    let [effectId, newEffectIndex] = eventKey.split(',');
+    newEffectIndex = parseInt(newEffectIndex);
+    const Effector = Effects[newEffectIndex];
+    props.changeEffect(props.trackId, effectId, new Effector(props.audioContext));
   }
 
   function removeEffect (effectId) {
@@ -53,12 +52,12 @@ function TrackController (props) {
         <ul className="effect-list">
           {props.effects.map(effect => (
             <li key={effect.id}>
-              <DropdownButton title={effect.id} drop="right">
+              <DropdownButton title={effect.id} drop="right" variant="secondary">
                 <Dropdown.Item eventKey={effect.id} onSelect={removeEffect}>Unset</Dropdown.Item>
                 {EffectsName.map((effectName, index) => (
                   <Dropdown.Item
                     key={index}
-                    eventKey={{ effectId: effect.id, newEffectIndex: index }}
+                    eventKey={`${effect.id},${index}`}
                     onSelect={changeEffect}>{effectName}</Dropdown.Item>
                 ))}
               </DropdownButton>
