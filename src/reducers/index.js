@@ -14,8 +14,21 @@ const trackReducer = (state, action) => {
     case types.REMOVE_TRACK:
       return state.filter(track => track.id !== action.payload.trackId);
     case types.UPDATE_TRACK_NAME:
-      const targetTrack = state.find(track => track.id === action.payload.trackId);
-      targetTrack.setName(action.payload.trackName);
+      state
+        .find(track => track.id === action.payload.trackId)
+        .setName(action.payload.trackName);
+      return [...state];
+    case types.ADD_EFFECT:
+      state
+        .find(track => track.id === action.payload.trackId)
+        .addEffect(action.payload.effector);
+      return [...state];
+    case types.CHANGE_EFFECT:
+      return state;
+    case types.REMOVE_EFFECT:
+      state
+        .find(track => track.id === action.payload.trackId)
+        .removeEffect(action.payload.effectId);
       return [...state];
     default: break;
   }
@@ -27,6 +40,9 @@ const rootReducer = (state = initialState, action) => {
     case types.UPDATE_TRACK_NAME:
     case types.REMOVE_ALL_TRACKS:
     case types.REMOVE_TRACK:
+    case types.ADD_EFFECT:
+    case types.CHANGE_EFFECT:
+    case types.REMOVE_EFFECT:
       return {
         ...state,
         tracks: trackReducer(state.tracks, action),

@@ -1,5 +1,6 @@
 export class Effect {
   constructor (context, defaultOption, options) {
+    this.id = `effector-${new Date().getTime()}`;
     this.context = context;
     this.options = Object.assign({}, defaultOption, options);
     this.inputNode = this.context.createGain();

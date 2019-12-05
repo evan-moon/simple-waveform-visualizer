@@ -35,11 +35,15 @@ export class Track {
     lastNode.connect(effect.inputNode);
     effect.outputNode.connect(this.gainNode);
 
-    this.effects.push(effect);
+    this.effects = [...this.effects, effect];
   }
 
-  removeEffect (effect) {
-    const index = this.effects(effect);
+  changeEffect (effectId, newEffect) {
+
+  }
+
+  removeEffect (effectId) {
+    const index = this.effects.findIndex(e => e.id === effectId);
     if (!~index) {
       return;
     }
@@ -49,11 +53,9 @@ export class Track {
       : this.effects[index - 1].outputNode;
     prevNode.disconnect();
 
-    const effector = this.effects[index];
-    effector.disconnect();
-    this.effects.splice(index, 1);
-
-    const targetNode = this.effects[index] || this.gainNode;
+    const targetNode = this.effects[index + 1] || this.gainNode;
     prevNode.connect(targetNode);
+
+    this.effects = this.effects.filter(e => e.id !== effectId);
   }
 }
