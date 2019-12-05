@@ -52,7 +52,9 @@ export class Track {
     const prevNode = originEffectorIndex === 0
       ? this.sourceBuffer
       : this.effects[originEffectorIndex - 1].outputNode;
-    const targetNode = this.effects[originEffectorIndex + 1] || this.gainNode;
+    const targetNode = this.effects[originEffectorIndex + 1]
+      ? this.effects[originEffectorIndex + 1].inputNode
+      : this.gainNode;
 
     prevNode.disconnect();
     originEffector.outputNode.disconnect();
@@ -73,9 +75,11 @@ export class Track {
     const prevNode = index === 0
       ? this.sourceBuffer
       : this.effects[index - 1].outputNode;
-    prevNode.disconnect();
+    const targetNode = this.effects[index + 1]
+      ? this.effects[index + 1].inputNode
+      : this.gainNode;
 
-    const targetNode = this.effects[index + 1] || this.gainNode;
+    prevNode.disconnect();
     prevNode.connect(targetNode);
 
     this.effects = this.effects.filter(e => e.id !== effectId);
