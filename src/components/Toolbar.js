@@ -24,12 +24,12 @@ const StyledAside = styled.aside`
   background-color: #333333;
   div.toolbar-header {
     background-color: #444444;
-    padding: 3px;
+    padding: .5rem;
     
   }
   > ul {
     margin: 0;
-    padding: 0;
+    padding: .5rem;
     > li {
       height: 20vh;
     }
