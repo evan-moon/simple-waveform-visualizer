@@ -52,7 +52,7 @@ function TrackController (props) {
         <ul className="effect-list">
           {props.effects.map(effect => (
             <li key={effect.id}>
-              <DropdownButton title={effect.id} drop="right" variant="secondary">
+              <DropdownButton title={effect.name} drop="right" variant="secondary">
                 <Dropdown.Item eventKey={effect.id} onSelect={removeEffect}>Unset</Dropdown.Item>
                 {EffectsName.map((effectName, index) => (
                   <Dropdown.Item
