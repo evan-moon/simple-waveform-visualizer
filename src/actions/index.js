@@ -7,12 +7,6 @@ export const addAudioTrack = (audioTrack) => {
   };
 };
 
-export const removeAllTracks = () => {
-  return {
-    type: types.REMOVE_ALL_TRACKS,
-  };
-};
-
 export const removeTrack = (trackId) => {
   return {
     type: types.REMOVE_TRACK,
