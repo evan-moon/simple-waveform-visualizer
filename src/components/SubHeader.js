@@ -5,6 +5,7 @@ import { connect } from 'react-redux';
 import { addAudioTrack } from 'src/actions';
 import { AudioTrack } from 'lib/Tracks/AudioTrack';
 import { AsideDefaultWidth, TimelineDefaultWidth } from 'src/constants';
+import Timeline from 'components/Timeline';
 
 const mapStateToProps = ({ tracks, audioContext }) => {
   return {
@@ -57,7 +58,9 @@ function SubHeader (props) {
             size="sm"
             onClick={onClickUploadButton}>+</Button>
         </Col>
-        <Col></Col>
+        <Col xs={TimelineDefaultWidth}>
+          <Timeline />
+        </Col>
         <input ref={fileUploaderRef} onChange={onChangeFileUploader} type="file" style={{ display: 'none' }} />
       </Row>
     </Styled>
