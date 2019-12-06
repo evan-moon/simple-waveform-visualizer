@@ -6,18 +6,6 @@ JavaScript AudioContext API과 SVG를 사용하여 WaveForm를 렌더하고 몇�
 
 [Live Demo](https://simple-audio-waveform.herokuapp.com/)는 여기서 확인하실 수 있습니다.
 
-## TODO
-### View
-- <strike>WaveForm</strike>
-### Effects
-- <strike>Compressor</strike>
-- <strike>Reverb</strike>
-- <strike>Delay</strike>
-- <strike>Filter (LPF, HPF)</strike>
-- <strike>EQ</strike>
-- <strike>Distortion</strike>
-- <strike>Tremolo</strike>
-
 ## Usage
 ```bash
 $ npm run dev # 개발서버
