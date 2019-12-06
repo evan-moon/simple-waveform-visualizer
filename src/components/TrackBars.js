@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 import styled from 'styled-components';
 import TrackController from 'components/TrackController';
 import WaveFormViewer from 'components/WaveFormViewer';
-import { AsideDefaultWidth, WaveFormColors } from 'src/constants';
+import { AsideDefaultWidth, TimelineDefaultWidth, WaveFormColors } from 'src/constants';
 
 const mapStateToProps = ({ tracks }) => {
   return { tracks };
@@ -18,7 +18,6 @@ const StyledTrackBars = styled.div`
     padding: 0;
   }
   .track-control {
-    width: ${AsideDefaultWidth}px;
     background-color: #222222;
     padding: .5rem;
   }
@@ -33,13 +32,13 @@ function TrackBars (props) {
           return (
             <li key={track.id}>
               <Row noGutters={true}>
-                <Col xs="auto" className="track-control">
+                <Col xs={AsideDefaultWidth} className="track-control">
                   <TrackController
                     trackId={track.id}
                     trackName={track.name}
                     effects={track.effects} />
                 </Col>
-                <Col className="waveform-control">
+                <Col xs={TimelineDefaultWidth} className="waveform-control">
                   <WaveFormViewer track={track} color={WaveFormColors[index % WaveFormColors.length]} />
                 </Col>
               </Row>

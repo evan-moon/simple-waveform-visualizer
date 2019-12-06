@@ -4,7 +4,7 @@ import styled from 'styled-components';
 import { connect } from 'react-redux';
 import { addAudioTrack } from 'src/actions';
 import { AudioTrack } from 'lib/Tracks/AudioTrack';
-import { AsideDefaultWidth } from 'src/constants';
+import { AsideDefaultWidth, TimelineDefaultWidth } from 'src/constants';
 
 const mapStateToProps = ({ tracks, audioContext }) => {
   return {
@@ -18,10 +18,9 @@ const mapDispatchToProps = {
 };
 
 const Styled = styled.div`
-  background-color: #444444;
+  background-color: #000000;
   .track-control {
     padding: .5rem;
-    width: ${AsideDefaultWidth}px;
     background-color: #555555;
   }
 `;
@@ -52,7 +51,7 @@ function SubHeader (props) {
   return (
     <Styled>
       <Row noGutters={true}>
-        <Col xs="auto" className="track-control">
+        <Col xs={AsideDefaultWidth} className="track-control">
           <Button
             variant="secondary"
             size="sm"
