@@ -3,10 +3,13 @@ import styled from 'styled-components';
 import { WaveForm } from 'lib/WaveForm';
 
 const StyledTrack = styled.div`
+  display: inline-block;
+  width: 100%;
+  height: 100%;
   svg {
     stroke: #ffffff;
     width: 100%;
-    height: 20vh;
+    height: 100%;
     background-color: ${props => props.color};
   }
   g {
