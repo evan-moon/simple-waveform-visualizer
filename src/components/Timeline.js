@@ -12,7 +12,7 @@ const StyledRuler = styled.div`
   span.graduation {
     display: inline-block;
     width: 1px;
-    background-color: #000000;
+    background-color: #222222;
     margin-right: .5rem;
     margin-top: 23px;
     > span {
@@ -22,10 +22,10 @@ const StyledRuler = styled.div`
       letter-spacing: -1px;
     }
     &[data-time="second"] {
-      height: 30%;
+      height: 20%;
     }
     &[data-time="minute"] {
-      height: 50%;
+      height: 30%;
     }
   }
 `;
@@ -39,11 +39,11 @@ export const Ruler = ({ length }) => {
         return index % 60 === 0
           ? (
             <span className="graduation" data-time="minute" key={index}>
-              <span>{index}</span>
+              {/*<span>{index}</span>*/}
             </span>)
           : (
             <span className="graduation" data-time="second" key={index}>
-              <span>{index}</span>
+              {/*<span>{index}</span>*/}
             </span>
           );
       })}
