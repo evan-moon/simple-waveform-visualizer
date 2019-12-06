@@ -1,5 +1,6 @@
 import React, { useEffect, useRef } from 'react';
 import styled from 'styled-components';
+import { lighten } from 'polished'
 import { WaveForm } from 'lib/WaveForm';
 
 const StyledTrack = styled.div`
@@ -7,7 +8,7 @@ const StyledTrack = styled.div`
   width: 100%;
   height: 100%;
   svg {
-    stroke: #ffffff;
+    stroke: ${props => lighten(0.5, props.color)};
     width: 100%;
     height: 100%;
     background-color: ${props => props.color};
