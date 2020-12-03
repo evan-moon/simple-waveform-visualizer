@@ -1,0 +1,25 @@
+{
+  "files": {
+    "main.css": "/simple-waveform-visualizer/static/css/main.a9624a05.chunk.css",
+    "main.js": "/simple-waveform-visualizer/static/js/main.ad07a5da.chunk.js",
+    "main.js.map": "/simple-waveform-visualizer/static/js/main.ad07a5da.chunk.js.map",
+    "runtime-main.js": "/simple-waveform-visualizer/static/js/runtime-main.10b03568.js",
+    "runtime-main.js.map": "/simple-waveform-visualizer/static/js/runtime-main.10b03568.js.map",
+    "static/css/2.3d86ebba.chunk.css": "/simple-waveform-visualizer/static/css/2.3d86ebba.chunk.css",
+    "static/js/2.1c6c492e.chunk.js": "/simple-waveform-visualizer/static/js/2.1c6c492e.chunk.js",
+    "static/js/2.1c6c492e.chunk.js.map": "/simple-waveform-visualizer/static/js/2.1c6c492e.chunk.js.map",
+    "index.html": "/simple-waveform-visualizer/index.html",
+    "precache-manifest.2bcb8766673d48e9bc06930928dd5ba4.js": "/simple-waveform-visualizer/precache-manifest.2bcb8766673d48e9bc06930928dd5ba4.js",
+    "service-worker.js": "/simple-waveform-visualizer/service-worker.js",
+    "static/css/2.3d86ebba.chunk.css.map": "/simple-waveform-visualizer/static/css/2.3d86ebba.chunk.css.map",
+    "static/css/main.a9624a05.chunk.css.map": "/simple-waveform-visualizer/static/css/main.a9624a05.chunk.css.map",
+    "static/media/all.min.css": "/simple-waveform-visualizer/static/media/fa-solid-900.8e1ed89b.woff2"
+  },
+  "entrypoints": [
+    "static/js/runtime-main.10b03568.js",
+    "static/css/2.3d86ebba.chunk.css",
+    "static/js/2.1c6c492e.chunk.js",
+    "static/css/main.a9624a05.chunk.css",
+    "static/js/main.ad07a5da.chunk.js"
+  ]
+}
