@@ -2,6 +2,7 @@
   "name": "web-audio-editor",
   "description": "waveform visualization test",
   "author": "Evan Moon",
+  "homepage": "https://evan-moon.github.io/simple-waveform-visualizer",
   "version": "0.1.0",
   "private": true,
   "dependencies": {
