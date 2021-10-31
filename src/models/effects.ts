@@ -1,16 +1,16 @@
-export enum EffectType {
-  Compressor,
-  AlgorithmReverb,
-  ConvolutionReverb,
-  Delay,
-  Distortion,
-  Filter,
-  LowPassCombFilter,
-  GraphicEQ,
-  Tremolo,
-}
+export type EffectType =
+  | 'compressor'
+  | 'algorithmReverb'
+  | 'convolutionReverb'
+  | 'delay'
+  | 'distortion'
+  | 'filter'
+  | 'lowpassCombFilter'
+  | 'graphicEQ'
+  | 'tremolo';
 
 interface CommonEffectorNode {
+  id: string;
   inputNode: GainNode;
   outputNode: GainNode;
   options: unknown;
@@ -18,7 +18,7 @@ interface CommonEffectorNode {
 }
 
 export interface CompressorEffectorNode extends CommonEffectorNode {
-  type: EffectType.Compressor;
+  type: 'compressor';
   options: {
     threshold: number;
     knee: number;
@@ -29,7 +29,7 @@ export interface CompressorEffectorNode extends CommonEffectorNode {
 }
 
 export interface AlgorithmReverbEffectorNode extends CommonEffectorNode {
-  type: EffectType.AlgorithmReverb;
+  type: 'algorithmReverb';
   options: {
     mix: number;
     roomSize: number;
@@ -38,7 +38,7 @@ export interface AlgorithmReverbEffectorNode extends CommonEffectorNode {
 }
 
 export interface ConvolutionReverbEffectNode extends CommonEffectorNode {
-  type: EffectType.ConvolutionReverb;
+  type: 'convolutionReverb';
   options: {
     mix: number;
     time: number;
@@ -47,7 +47,7 @@ export interface ConvolutionReverbEffectNode extends CommonEffectorNode {
 }
 
 export interface DelayEffectNode extends CommonEffectorNode {
-  type: EffectType.Delay;
+  type: 'delay';
   options: {
     mix: number;
     feedback: number;
@@ -56,14 +56,14 @@ export interface DelayEffectNode extends CommonEffectorNode {
 }
 
 export interface DistortionEffectNode extends CommonEffectorNode {
-  type: EffectType.Distortion;
+  type: 'distortion';
   options: {
     distortion: number;
   };
 }
 
 export interface FilterEffectNode extends CommonEffectorNode {
-  type: EffectType.Filter;
+  type: 'filter';
   options: {
     type: BiquadFilterType;
     frequency: number;
@@ -72,7 +72,7 @@ export interface FilterEffectNode extends CommonEffectorNode {
 }
 
 export interface LowPassCombFilterEffectNode extends CommonEffectorNode {
-  type: EffectType.LowPassCombFilter;
+  type: 'lowpassCombFilter';
   options: {
     type: 'lowpassComb';
     frequency: number;
@@ -82,17 +82,27 @@ export interface LowPassCombFilterEffectNode extends CommonEffectorNode {
 }
 
 export interface GraphicEQEffectNode extends CommonEffectorNode {
-  type: EffectType.GraphicEQ;
+  type: 'graphicEQ';
   options: {
     frequencies: number[];
   };
 }
 
 export interface TremoloEffectNode extends CommonEffectorNode {
-  type: EffectType.Tremolo;
+  type: 'tremolo';
   options: {
     speed: number;
     depth: number;
     mix: number;
   };
 }
+
+export type EffectNode =
+  | CompressorEffectorNode
+  | AlgorithmReverbEffectorNode
+  | ConvolutionReverbEffectNode
+  | DelayEffectNode
+  | DistortionEffectNode
+  | FilterEffectNode
+  | LowPassCombFilterEffectNode
+  | GraphicEQEffectNode;

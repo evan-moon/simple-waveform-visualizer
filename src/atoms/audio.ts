@@ -1,5 +1,5 @@
 import { atom } from 'recoil';
-import { Effect } from '../lib/effects/Effect';
+import { Effect } from '../core/effects/Effect';
 import { AudioObject } from '../models/audio';
 
 export const audioContextState = atom<AudioObject | null>({

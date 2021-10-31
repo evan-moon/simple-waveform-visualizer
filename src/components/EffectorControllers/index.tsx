@@ -1,9 +1,20 @@
+/** @jsxImportSource @emotion/react */
 import { useAudio } from '../../hooks/useAudio';
 import { useEffects } from '../../hooks/useEffects';
 import { Compressor } from '../../lib/effects/Compressor';
+import { EffectNode } from '../../models/effects';
+import CompressorController from './CompressorController';
 
-/** @jsxImportSource @emotion/react */
-const Effectors = () => {
+const getEffector = (effect: EffectNode) => {
+  switch (effect.type) {
+    case 'compressor':
+      return <CompressorController effect={effect} />;
+    default:
+      null;
+  }
+};
+
+const EffectorControllers = () => {
   const [audio] = useAudio();
   const { registedEffects, addEffect } = useEffects();
 
@@ -11,7 +22,7 @@ const Effectors = () => {
     <div>
       <ul css={{ margin: 0, padding: 0 }}>
         {registedEffects.map((effect) => (
-          <li key={effect.id}>{effect.id}</li>
+          <li key={effect.id}>{getEffector(effect)}</li>
         ))}
       </ul>
       <button
@@ -25,4 +36,4 @@ const Effectors = () => {
   );
 };
 
-export default Effectors;
+export default EffectorControllers;

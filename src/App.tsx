@@ -2,7 +2,7 @@ import { RecoilRoot } from 'recoil';
 import AudioUploader from './components/AudioUploader';
 import Controller from './components/Controller';
 import WaveForm from './components/Waveform';
-import Effectors from './components/Effectors';
+import EffectorControllers from './components/EffectorControllers';
 
 function App() {
   return (
@@ -10,7 +10,7 @@ function App() {
       <AudioUploader />
       <WaveForm />
       <Controller />
-      <Effectors />
+      <EffectorControllers />
     </RecoilRoot>
   );
 }

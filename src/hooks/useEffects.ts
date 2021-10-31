@@ -1,6 +1,6 @@
 import { useRecoilState } from 'recoil';
 import { effectState } from '../atoms/audio';
-import { Effect } from '../lib/effects/Effect';
+import { Effect } from '../core/effects/Effect';
 import { useAudio } from './useAudio';
 
 export function useEffects() {
