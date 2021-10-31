@@ -1,13 +1,14 @@
 import { atom } from 'recoil';
-import { Effect } from '../core/effects/Effect';
 import { AudioObject } from '../models/audio';
+import { Effector } from '../models/effects';
 
 export const audioContextState = atom<AudioObject | null>({
   key: 'audioContext',
   default: null,
 });
 
-export const effectState = atom<Effect[]>({
+export const effectState = atom<Effector[]>({
   key: 'audioEffects',
   default: [],
+  dangerouslyAllowMutability: true,
 });

@@ -1,13 +1,28 @@
 import { Effect } from './Effect';
 
-export class Tremolo extends Effect {
-  constructor(context, options) {
+interface Options {
+  speed: number;
+  depth: number;
+  mix: number;
+  gain: number;
+}
+export class Tremolo extends Effect<Options> {
+  wetNode: GainNode;
+  dryNode: GainNode;
+  tremoloNode: GainNode;
+
+  shaperNode: WaveShaperNode;
+  lfoNode: OscillatorNode;
+
+  constructor(context: AudioContext, options?: Options) {
     const defaultOption = {
       speed: 4,
       depth: 1,
       mix: 0.8,
+      gain: 1,
     };
-    super(context, defaultOption, options);
+
+    super(context, 'tremolo', defaultOption, options);
 
     this.wetNode = this.context.createGain();
     this.dryNode = this.context.createGain();
@@ -32,18 +47,18 @@ export class Tremolo extends Effect {
     this.wetNode.connect(this.outputNode);
   }
 
-  setMix(value) {
+  setMix(value: number) {
     this.options.mix = value;
     this.wetNode.gain.value = value;
     this.dryNode.gain.value = 1 - value;
   }
 
-  setSpeed(value) {
+  setSpeed(value: number) {
     this.options.speed = value;
     this.lfoNode.frequency.value = value;
   }
 
-  setDepth(value) {
+  setDepth(value: number) {
     this.options.depth = value;
     this.shaperNode.curve = new Float32Array([1 - value, 1]);
   }

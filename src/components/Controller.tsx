@@ -26,8 +26,15 @@ const Controller = () => {
       <div>
         {audio?.masterGain != null ? (
           <>
-            <label>마스터 Gain</label>
-            <ControlRange target={audio?.masterGain.gain} />
+            <ControlRange
+              label="Master"
+              min={0}
+              max={10}
+              defaultValue={3}
+              onChange={(value) =>
+                audio.masterGain.gain.setValueAtTime(value, audio.context.currentTime)
+              }
+            />
           </>
         ) : null}
       </div>

@@ -1,13 +1,24 @@
 import { Effect } from './Effect';
 
-export class ConvolutionReverb extends Effect {
-  constructor(context, options) {
+interface Options {
+  mix: number;
+  time: number;
+  decay: number;
+  gain: number;
+}
+export class ConvolutionReverb extends Effect<Options> {
+  reverbNode: ConvolverNode;
+  wetNode: GainNode;
+  dryNode: GainNode;
+
+  constructor(context: AudioContext, options?: Options) {
     const defaultOption = {
       mix: 0.5,
       time: 0.01,
       decay: 0.01,
+      gain: 1,
     };
-    super(context, defaultOption, options);
+    super(context, 'convolutionReverb', defaultOption, options);
 
     this.reverbNode = context.createConvolver();
     this.wetNode = context.createGain();
@@ -24,19 +35,19 @@ export class ConvolutionReverb extends Effect {
     this._generateImpulseResponse();
   }
 
-  setMix(value) {
+  setMix(value: number) {
     // 0 ~ 1 (dry ~ wet)
     this.options.mix = value;
     this.wetNode.gain.value = value;
     this.dryNode.gain.value = 1 - value;
   }
 
-  setTime(value) {
+  setTime(value: number) {
     this.options.time = value;
     this._generateImpulseResponse();
   }
 
-  setDecay(value) {
+  setDecay(value: number) {
     this.options.decay = value;
     this._generateImpulseResponse();
   }

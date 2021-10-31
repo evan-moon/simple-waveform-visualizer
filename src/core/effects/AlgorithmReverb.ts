@@ -1,14 +1,28 @@
-import { LowPassCombFilter } from './Filter';
+import { LowPassCombFilter } from './LowPassCombFilter';
 import { Effect } from './Effect';
 
-export class AlgorithmReverb extends Effect {
-  constructor(context, options) {
+interface Options {
+  mix: number;
+  roomSize: number;
+  dampening: number;
+  gain: number;
+}
+export class AlgorithmReverb extends Effect<Options> {
+  wetNode: GainNode;
+  dryNode: GainNode;
+  splitter: ChannelSplitterNode;
+  merger: ChannelMergerNode;
+  combFilters: LowPassCombFilter[];
+  allFilters: BiquadFilterNode[];
+
+  constructor(context: AudioContext, options?: Options) {
     const defaultOption = {
       mix: 0.5,
       roomSize: 3,
       dampening: 3,
+      gain: 1,
     };
-    super(context, defaultOption, options);
+    super(context, 'algorithmReverb', defaultOption, options);
     const sampleRate = context.sampleRate;
 
     this.wetNode = this.context.createGain();
@@ -20,11 +34,17 @@ export class AlgorithmReverb extends Effect {
       return new LowPassCombFilter(this.context, {
         delay: delayPerSecond / sampleRate,
         frequency: this.options.dampening,
+        resonance: 0.5,
+        gain: 1,
       });
     });
-    this.allFilters = [225, 556, 441, 341].map((frequency) =>
-      this.context.createBiquadFilter({ type: 'allpass', frequency })
-    );
+
+    this.allFilters = [225, 556, 441, 341].map((frequency) => {
+      const filter = this.context.createBiquadFilter();
+      filter.type = 'allpass';
+      filter.frequency.setValueAtTime(frequency, this.context.currentTime);
+      return filter;
+    });
 
     const combLeft = this.combFilters.slice(0, 1);
     const combRight = this.combFilters.slice(7);
@@ -49,18 +69,18 @@ export class AlgorithmReverb extends Effect {
       .connect(this.outputNode);
   }
 
-  setMix(value) {
+  setMix(value: number) {
     // 0 ~ 1 (dry ~ wet)
     this.options.mix = value;
     this.wetNode.gain.value = value;
     this.dryNode.gain.value = 1 - value;
   }
 
-  setRoomSize(value) {
+  setRoomSize(value: number) {
     this.combFilters.forEach((combFilter) => combFilter.setResonance(value));
   }
 
-  setDampening(value) {
+  setDampening(value: number) {
     this.combFilters.forEach((combFilter) => combFilter.setFrequency(value));
   }
 }

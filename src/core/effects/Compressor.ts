@@ -1,15 +1,26 @@
 import { Effect } from './Effect';
 
-export class Compressor extends Effect {
-  constructor(context, options) {
+interface Options {
+  gain: number;
+  threshold: number;
+  knee: number;
+  attack: number;
+  release: number;
+  ratio: number;
+}
+export class Compressor extends Effect<Options> {
+  compressorNode: DynamicsCompressorNode;
+
+  constructor(context: AudioContext, options?: Options) {
     const defaultOption = {
       threshold: -24,
       knee: 30,
       attack: 0.003,
       release: 0.25,
       ratio: 12,
+      gain: 1,
     };
-    super(context, defaultOption, options);
+    super(context, 'compressor', defaultOption, options);
     this.compressorNode = context.createDynamicsCompressor();
 
     const t = this.context.currentTime;
@@ -23,27 +34,27 @@ export class Compressor extends Effect {
     this.compressorNode.connect(this.outputNode);
   }
 
-  setThreshold(value) {
+  setThreshold(value: number) {
     const t = this.context.currentTime;
     this.compressorNode.threshold.setValueAtTime(value, t);
   }
 
-  setKnee(value) {
+  setKnee(value: number) {
     const t = this.context.currentTime;
     this.compressorNode.knee.setValueAtTime(value, t);
   }
 
-  setAttack(value) {
+  setAttack(value: number) {
     const t = this.context.currentTime;
     this.compressorNode.attack.setValueAtTime(value, t);
   }
 
-  setRelease(value) {
+  setRelease(value: number) {
     const t = this.context.currentTime;
     this.compressorNode.release.setValueAtTime(value, t);
   }
 
-  setRatio(value) {
+  setRatio(value: number) {
     const t = this.context.currentTime;
     this.compressorNode.ratio.setValueAtTime(value, t);
   }

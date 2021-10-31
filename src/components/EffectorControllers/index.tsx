@@ -1,17 +1,15 @@
 /** @jsxImportSource @emotion/react */
 import { useAudio } from '../../hooks/useAudio';
 import { useEffects } from '../../hooks/useEffects';
-import { Compressor } from '../../lib/effects/Compressor';
-import { EffectNode } from '../../models/effects';
+import { Compressor } from '../../core/effects/Compressor';
 import CompressorController from './CompressorController';
+import { Effector } from '../../models/effects';
 
-const getEffector = (effect: EffectNode) => {
-  switch (effect.type) {
-    case 'compressor':
-      return <CompressorController effect={effect} />;
-    default:
-      null;
+const getEffector = (effect: Effector) => {
+  if (effect instanceof Compressor) {
+    return <CompressorController effect={effect} />;
   }
+  return null;
 };
 
 const EffectorControllers = () => {
@@ -20,14 +18,18 @@ const EffectorControllers = () => {
 
   return (
     <div>
-      <ul css={{ margin: 0, padding: 0 }}>
+      <ul css={{ display: 'flex', margin: 0, padding: 0 }}>
         {registedEffects.map((effect) => (
           <li key={effect.id}>{getEffector(effect)}</li>
         ))}
       </ul>
       <button
         onClick={() => {
-          addEffect(new Compressor(audio?.context));
+          if (audio?.context == null) {
+            return;
+          }
+
+          addEffect(new Compressor(audio.context));
         }}
       >
         이펙터 추가

@@ -1,13 +1,25 @@
 import { Effect } from './Effect';
 
-export class Delay extends Effect {
-  constructor(context, options) {
+interface Options {
+  mix: number;
+  feedback: number;
+  time: number;
+  gain: number;
+}
+export class Delay extends Effect<Options> {
+  dryNode: GainNode;
+  wetNode: GainNode;
+  feedbackNode: GainNode;
+  delayNode: DelayNode;
+
+  constructor(context: AudioContext, options?: Options) {
     const defaultOption = {
       mix: 0.5,
       feedback: 0.5,
       time: 0.3,
+      gain: 1,
     };
-    super(context, defaultOption, options);
+    super(context, 'delay', defaultOption, options);
 
     this.dryNode = this.context.createGain();
     this.wetNode = this.context.createGain();
@@ -29,18 +41,18 @@ export class Delay extends Effect {
     this.setFeedback(this.options.feedback);
   }
 
-  setMix(value) {
+  setMix(value: number) {
     this.options.mix = value;
     this.wetNode.gain.value = value;
     this.dryNode.gain.value = 1 - value;
   }
 
-  setTime(value) {
+  setTime(value: number) {
     this.options.time = value;
     this.delayNode.delayTime.setValueAtTime(value, this.context.currentTime);
   }
 
-  setFeedback(value) {
+  setFeedback(value: number) {
     this.options.feedback = value;
     this.feedbackNode.gain.setValueAtTime(value, this.context.currentTime);
   }

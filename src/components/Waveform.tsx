@@ -23,7 +23,7 @@ const WaveForm = ({ color = '#000000' }: Props) => {
     <svg
       ref={svgRef}
       css={{ width: '100%', height: 300 }}
-      viewBox={`0 -1 ${audio?.buffer.sampleRate} 2`}
+      viewBox={`0 -1 ${audio?.buffer.sampleRate ?? 0} 2`}
       preserveAspectRatio="none"
     >
       <g css={{ width: '100%', height: '100%' }}>

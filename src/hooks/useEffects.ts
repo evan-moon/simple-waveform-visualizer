@@ -1,13 +1,13 @@
 import { useRecoilState } from 'recoil';
 import { effectState } from '../atoms/audio';
-import { Effect } from '../core/effects/Effect';
+import { Effector } from '../models/effects';
 import { useAudio } from './useAudio';
 
 export function useEffects() {
   const [audio] = useAudio();
   const [registedEffects, registEffects] = useRecoilState(effectState);
 
-  const addEffect = (effect: Effect) => {
+  const addEffect = (effect: Effector) => {
     if (audio == null) {
       throw new Error('아직 AudioContext가 등록되지 않았습니다');
     }
@@ -49,7 +49,7 @@ export function useEffects() {
     registEffects((effects) => effects.filter((effect) => effect.id !== effectId));
   };
 
-  const changeEffect = (effectId: string, newEffect: Effect) => {
+  const changeEffect = (effectId: string, newEffect: Effector) => {
     if (audio == null) {
       throw new Error('아직 AudioContext가 등록되지 않았습니다');
     }
