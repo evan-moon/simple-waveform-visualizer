@@ -1,5 +1,5 @@
 export class Track {
-  constructor (context) {
+  constructor(context) {
     this.id = `track-${Date.now()}`;
     this.name = this.id;
     this.audioContext = context;
@@ -10,33 +10,34 @@ export class Track {
     this.isPlaying = false;
   }
 
-  setName (name) {
+  setName(name) {
     this.name = name;
   }
 
-  mute () {
+  mute() {
     this.gainNode.gain.value = 0;
   }
 
-  setGain (value) {
+  setGain(value) {
     this.gainNode.gain.value = value;
   }
 
-  play () {
+  play() {
     this.sourceBuffer.loop = true; // For Test
     this.sourceBuffer.start();
     this.isPlaying = true;
   }
 
-  stop () {
+  stop() {
     this.sourceBuffer.stop();
     this.isPlaying = false;
   }
 
-  addEffect (effect) {
-    const lastNode = this.effects.length > 0
-      ? this.effects[this.effects.length - 1].outputNode
-      : this.sourceBuffer;
+  addEffect(effect) {
+    const lastNode =
+      this.effects.length > 0
+        ? this.effects[this.effects.length - 1].outputNode
+        : this.sourceBuffer;
 
     lastNode.disconnect();
     lastNode.connect(effect.inputNode);
@@ -45,13 +46,14 @@ export class Track {
     this.effects = [...this.effects, effect];
   }
 
-  changeEffect (effectId, newEffect) {
-    const originEffectorIndex = this.effects.findIndex(e => e.id === effectId);
+  changeEffect(effectId, newEffect) {
+    const originEffectorIndex = this.effects.findIndex((e) => e.id === effectId);
     const originEffector = this.effects[originEffectorIndex];
 
-    const prevNode = originEffectorIndex === 0
-      ? this.sourceBuffer
-      : this.effects[originEffectorIndex - 1].outputNode;
+    const prevNode =
+      originEffectorIndex === 0
+        ? this.sourceBuffer
+        : this.effects[originEffectorIndex - 1].outputNode;
     const targetNode = this.effects[originEffectorIndex + 1]
       ? this.effects[originEffectorIndex + 1].inputNode
       : this.gainNode;
@@ -66,22 +68,18 @@ export class Track {
     this.effects = [...this.effects];
   }
 
-  removeEffect (effectId) {
-    const index = this.effects.findIndex(e => e.id === effectId);
+  removeEffect(effectId) {
+    const index = this.effects.findIndex((e) => e.id === effectId);
     if (!~index) {
       return;
     }
 
-    const prevNode = index === 0
-      ? this.sourceBuffer
-      : this.effects[index - 1].outputNode;
-    const targetNode = this.effects[index + 1]
-      ? this.effects[index + 1].inputNode
-      : this.gainNode;
+    const prevNode = index === 0 ? this.sourceBuffer : this.effects[index - 1].outputNode;
+    const targetNode = this.effects[index + 1] ? this.effects[index + 1].inputNode : this.gainNode;
 
     prevNode.disconnect();
     prevNode.connect(targetNode);
 
-    this.effects = this.effects.filter(e => e.id !== effectId);
+    this.effects = this.effects.filter((e) => e.id !== effectId);
   }
 }

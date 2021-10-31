@@ -21,15 +21,15 @@ import { TremoloControls } from './effectControls/Tremolo';
   const audioContext = new (AudioContext || webkitAudioContext)();
   const audio = new Audio(audioContext);
 
-  $('#play-button').on('click', e => {
+  $('#play-button').on('click', (e) => {
     audio.play();
   });
 
-  $('#audio-uploader').on('change', e => {
+  $('#audio-uploader').on('change', (e) => {
     const file = e.currentTarget.files[0];
     if (file) {
       const reader = new FileReader();
-      reader.onload = e => {
+      reader.onload = (e) => {
         audio.setAudio(e.target.result).then(() => {
           const waveForm = new WaveForm(audio);
           waveForm.draw({ svgBoxId: 'waveform', pathGroupId: 'waveform-path-group' });
@@ -89,7 +89,7 @@ import { TremoloControls } from './effectControls/Tremolo';
     $(`.control-panels-wrapper[data-name="${type}"]`).append(effectControl.getControlDOM());
   });
 
-  document.getElementById('master-gain-controller').oninput = e => {
+  document.getElementById('master-gain-controller').oninput = (e) => {
     const gain = parseInt(e.target.value) / 100;
     audio.setGain(gain * 2);
   };

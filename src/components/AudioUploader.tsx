@@ -41,12 +41,11 @@ const AudioUploader = () => {
       <button
         onClick={handleClick}
         css={{
-          width: '100%',
-          height: 300,
+          width: 30,
+          height: 30,
           border: 'none',
           cursor: 'pointer',
           transition: 'opacity .2s ease-in-out',
-          fontSize: 48,
           '&:hover': {
             opacity: 0.7,
           },
