@@ -2,7 +2,7 @@ import { LowPassCombFilter } from './Filter';
 import { Effect } from './Effect';
 
 export class AlgorithmReverb extends Effect {
-  constructor (context, options) {
+  constructor(context, options) {
     const defaultOption = {
       mix: 0.5,
       roomSize: 3,
@@ -16,13 +16,15 @@ export class AlgorithmReverb extends Effect {
     this.splitter = this.context.createChannelSplitter(2);
     this.merger = this.context.createChannelMerger(2);
 
-    this.combFilters = [1557, 1617, 1491, 1422, 1277, 1356, 1188, 1116].map(delayPerSecond => {
+    this.combFilters = [1557, 1617, 1491, 1422, 1277, 1356, 1188, 1116].map((delayPerSecond) => {
       return new LowPassCombFilter(this.context, {
         delay: delayPerSecond / sampleRate,
         frequency: this.options.dampening,
       });
     });
-    this.allFilters = [225, 556, 441, 341].map(frequency => this.context.createBiquadFilter({ type: 'allpass', frequency }));
+    this.allFilters = [225, 556, 441, 341].map((frequency) =>
+      this.context.createBiquadFilter({ type: 'allpass', frequency })
+    );
 
     const combLeft = this.combFilters.slice(0, 1);
     const combRight = this.combFilters.slice(7);
@@ -30,12 +32,12 @@ export class AlgorithmReverb extends Effect {
     this.inputNode.connect(this.wetNode).connect(this.splitter);
     this.inputNode.connect(this.dryNode).connect(this.outputNode);
 
-    combLeft.forEach(combFilter => {
+    combLeft.forEach((combFilter) => {
       this.splitter.connect(combFilter.inputNode, 0);
       combFilter.outputNode.connect(this.merger, 0, 0);
     });
-    combRight.forEach(combFilter => {
-      this.splitter.connect(combFilter.inputNode, 1)
+    combRight.forEach((combFilter) => {
+      this.splitter.connect(combFilter.inputNode, 1);
       combFilter.outputNode.connect(this.merger, 0, 1);
     });
 
@@ -47,18 +49,18 @@ export class AlgorithmReverb extends Effect {
       .connect(this.outputNode);
   }
 
-  setMix (value) {
+  setMix(value) {
     // 0 ~ 1 (dry ~ wet)
     this.options.mix = value;
     this.wetNode.gain.value = value;
     this.dryNode.gain.value = 1 - value;
   }
 
-  setRoomSize (value) {
-    this.combFilters.forEach(combFilter => combFilter.setResonance(value));
+  setRoomSize(value) {
+    this.combFilters.forEach((combFilter) => combFilter.setResonance(value));
   }
 
-  setDampening (value) {
-    this.combFilters.forEach(combFilter => combFilter.setFrequency(value));
+  setDampening(value) {
+    this.combFilters.forEach((combFilter) => combFilter.setFrequency(value));
   }
 }

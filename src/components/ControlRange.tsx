@@ -1,3 +1,4 @@
+/** @jsxImportSource @emotion/react */
 import { useEffect, useState } from 'react';
 import { useAudio } from '../hooks/useAudio';
 
@@ -24,6 +25,9 @@ const ControlRange = ({ target, defaultValue = 500 }: Props) => {
       value={value}
       onChange={(e) => {
         setValue(Number(e.target.value));
+      }}
+      css={{
+        '-webkit-appearance': 'slider-vertical',
       }}
     />
   );

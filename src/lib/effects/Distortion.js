@@ -1,7 +1,7 @@
 import { Effect } from './Effect';
 
 export class Distortion extends Effect {
-  constructor (context, options) {
+  constructor(context, options) {
     const defaultOption = {
       gain: 1,
     };
@@ -14,12 +14,12 @@ export class Distortion extends Effect {
     this.adjustGain();
   }
 
-  setGain (gain) {
+  setGain(gain) {
     this.options.gain = gain;
     this.adjustGain();
   }
 
-  adjustGain () {
+  adjustGain() {
     const gain = this.options.gain * 100;
     const sampleRate = this.context.sampleRate;
     const curve = new Float32Array(sampleRate);
@@ -27,8 +27,8 @@ export class Distortion extends Effect {
     let x;
 
     for (let i = 0; i < sampleRate; ++i) {
-      x = i * 2 / sampleRate - 1;
-      curve[i] = (3 + gain) * x * 20 * deg / (Math.PI + gain * Math.abs(x));
+      x = (i * 2) / sampleRate - 1;
+      curve[i] = ((3 + gain) * x * 20 * deg) / (Math.PI + gain * Math.abs(x));
     }
 
     console.log(gain);

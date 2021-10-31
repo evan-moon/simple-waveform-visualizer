@@ -1,7 +1,7 @@
 import { Effect } from './Effect';
 
 class Filter extends Effect {
-  constructor (context, options, type) {
+  constructor(context, options, type) {
     const defaultOption = {
       frequency: 350,
       q: 1,
@@ -17,30 +17,30 @@ class Filter extends Effect {
     this.filterNode.connect(this.outputNode);
   }
 
-  setFrequency (value) {
+  setFrequency(value) {
     // LPF, HPF의 min, max 정해줘야 할듯? 현재는 1~22050
     this.filterNode.frequency.setValueAtTime(value, this.context.currentTime);
   }
 
-  setQ (value) {
+  setQ(value) {
     this.filterNode.Q.setValueAtTime(value, this.context.currentTime);
   }
 }
 
 export class LowPassFilter extends Filter {
-  constructor (context, options) {
+  constructor(context, options) {
     super(context, options, 'lowpass');
   }
 }
 
 export class HighPassFilter extends Filter {
-  constructor (context, options) {
+  constructor(context, options) {
     super(context, options, 'highpass');
   }
 }
 
 export class LowPassCombFilter {
-  constructor (context, options) {
+  constructor(context, options) {
     const defaultOption = {
       frequency: 440,
       delay: 0.7,
@@ -67,15 +67,15 @@ export class LowPassCombFilter {
       .connect(this.outputNode);
   }
 
-  setFrequency (value) {
+  setFrequency(value) {
     this.filterNode.frequency.setValueAtTime(value, this.context.currentTime);
   }
 
-  setDelay (value) {
+  setDelay(value) {
     this.delayNode.delayTime.setValueAtTime(value, this.context.currentTime);
   }
 
-  setResonance (value) {
+  setResonance(value) {
     this.options.resonance = value;
     this.gainNode.gain.setValueAtTime(value, this.context.currentTime);
   }

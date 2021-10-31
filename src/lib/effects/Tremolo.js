@@ -1,7 +1,7 @@
 import { Effect } from './Effect';
 
 export class Tremolo extends Effect {
-  constructor (context, options) {
+  constructor(context, options) {
     const defaultOption = {
       speed: 4,
       depth: 1,
@@ -16,7 +16,7 @@ export class Tremolo extends Effect {
     this.tremoloNode.gain.value = 0;
 
     this.shaperNode = this.context.createWaveShaper();
-    this.shaperNode.curve = new Float32Array([ 0, 1 ]);
+    this.shaperNode.curve = new Float32Array([0, 1]);
     this.shaperNode.connect(this.tremoloNode.gain);
 
     this.lfoNode = this.context.createOscillator();
@@ -32,19 +32,19 @@ export class Tremolo extends Effect {
     this.wetNode.connect(this.outputNode);
   }
 
-  setMix (value) {
+  setMix(value) {
     this.options.mix = value;
     this.wetNode.gain.value = value;
     this.dryNode.gain.value = 1 - value;
   }
 
-  setSpeed (value) {
+  setSpeed(value) {
     this.options.speed = value;
     this.lfoNode.frequency.value = value;
   }
 
-  setDepth (value) {
+  setDepth(value) {
     this.options.depth = value;
-    this.shaperNode.curve = new Float32Array([ 1 - value, 1]);
+    this.shaperNode.curve = new Float32Array([1 - value, 1]);
   }
 }

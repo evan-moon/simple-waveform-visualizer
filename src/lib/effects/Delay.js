@@ -1,7 +1,7 @@
 import { Effect } from './Effect';
 
 export class Delay extends Effect {
-  constructor (context, options) {
+  constructor(context, options) {
     const defaultOption = {
       mix: 0.5,
       feedback: 0.5,
@@ -29,18 +29,18 @@ export class Delay extends Effect {
     this.setFeedback(this.options.feedback);
   }
 
-  setMix (value) {
+  setMix(value) {
     this.options.mix = value;
     this.wetNode.gain.value = value;
     this.dryNode.gain.value = 1 - value;
   }
 
-  setTime (value) {
+  setTime(value) {
     this.options.time = value;
     this.delayNode.delayTime.setValueAtTime(value, this.context.currentTime);
   }
 
-  setFeedback (value) {
+  setFeedback(value) {
     this.options.feedback = value;
     this.feedbackNode.gain.setValueAtTime(value, this.context.currentTime);
   }

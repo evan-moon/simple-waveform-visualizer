@@ -1,7 +1,7 @@
 import { Effect } from './Effect';
 
 export class ConvolutionReverb extends Effect {
-  constructor (context, options) {
+  constructor(context, options) {
     const defaultOption = {
       mix: 0.5,
       time: 0.01,
@@ -24,24 +24,24 @@ export class ConvolutionReverb extends Effect {
     this._generateImpulseResponse();
   }
 
-  setMix (value) {
+  setMix(value) {
     // 0 ~ 1 (dry ~ wet)
     this.options.mix = value;
     this.wetNode.gain.value = value;
     this.dryNode.gain.value = 1 - value;
   }
 
-  setTime (value) {
+  setTime(value) {
     this.options.time = value;
     this._generateImpulseResponse();
   }
 
-  setDecay (value) {
+  setDecay(value) {
     this.options.decay = value;
     this._generateImpulseResponse();
   }
 
-  _generateImpulseResponse () {
+  _generateImpulseResponse() {
     const sampleRate = this.context.sampleRate;
     const length = sampleRate * this.options.time;
     const impulse = this.context.createBuffer(2, length, sampleRate);
@@ -50,7 +50,7 @@ export class ConvolutionReverb extends Effect {
     const rightImpulse = impulse.getChannelData(1);
 
     const decay = this.options.decay;
-    for (let i = 0; i < length; i ++) {
+    for (let i = 0; i < length; i++) {
       leftImpulse[i] = (Math.random() * 2 - 1) * Math.pow(1 - i / length, decay);
       rightImpulse[i] = (Math.random() * 2 - 1) * Math.pow(1 - i / length, decay);
     }

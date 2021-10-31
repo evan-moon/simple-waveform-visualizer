@@ -16,9 +16,9 @@ export const Effects = [
   HighPassFilter,
   LowPassCombFilter,
   GraphicEQ,
-  Tremolo
+  Tremolo,
 ];
 
-export const EffectsName = Effects.map(effect => {
+export const EffectsName = Effects.map((effect) => {
   return fromTitleCaseToStartCase(effect.name);
 });
