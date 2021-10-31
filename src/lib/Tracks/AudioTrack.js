@@ -1,14 +1,14 @@
 import { Track } from 'lib/Tracks/Track';
 
 export class AudioTrack extends Track {
-  constructor (context) {
+  constructor(context) {
     super(context);
     this.audioBuffer = null;
     this.sampleRate = 0;
   }
 
-  setAudio (audioFile) {
-    return this.audioContext.decodeAudioData(audioFile).then(buffer => {
+  setAudio(audioFile) {
+    return this.audioContext.decodeAudioData(audioFile).then((buffer) => {
       this.audioBuffer = buffer;
       this.sampleRate = buffer.sampleRate;
       this.sourceBuffer = this.audioContext.createBufferSource();
@@ -18,7 +18,7 @@ export class AudioTrack extends Track {
     });
   }
 
-  reset () {
+  reset() {
     this.audioContext = new AudioContext();
     this.audioBuffer = null;
     this.sampleRate = 0;

@@ -1,6 +1,6 @@
 export class Track {
   constructor (context) {
-    this.id = `track-${new Date().getTime()}`;
+    this.id = `track-${Date.now()}`;
     this.name = this.id;
     this.audioContext = context;
     this.gainNode = this.audioContext.createGain();
