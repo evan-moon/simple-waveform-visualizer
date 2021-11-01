@@ -17,8 +17,8 @@ const CompressorController = ({ effect }: Props) => {
       <ControlRange
         label="Gain"
         min={0}
-        max={10}
-        defaultValue={3}
+        max={1}
+        defaultValue={0.3}
         onChange={(value) => effect.setGain(value)}
       />
       <ControlRange
@@ -39,7 +39,7 @@ const CompressorController = ({ effect }: Props) => {
         label="Attack"
         min={0}
         max={1}
-        defaultValue={3}
+        defaultValue={0.3}
         onChange={(value) => effect.setAttack(value)}
       />
       <ControlRange
