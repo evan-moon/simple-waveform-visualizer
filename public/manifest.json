@@ -1,6 +1,6 @@
 {
-  "short_name": "Web Audio Editor",
-  "name": "Web Audio Editor",
+  "short_name": "React App",
+  "name": "Create React App Sample",
   "icons": [
     {
       "src": "favicon.ico",
