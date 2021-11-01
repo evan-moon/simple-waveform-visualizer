@@ -1,25 +1,19 @@
 {
   "files": {
-    "main.css": "/simple-waveform-visualizer/static/css/main.a9624a05.chunk.css",
-    "main.js": "/simple-waveform-visualizer/static/js/main.ad07a5da.chunk.js",
-    "main.js.map": "/simple-waveform-visualizer/static/js/main.ad07a5da.chunk.js.map",
-    "runtime-main.js": "/simple-waveform-visualizer/static/js/runtime-main.10b03568.js",
-    "runtime-main.js.map": "/simple-waveform-visualizer/static/js/runtime-main.10b03568.js.map",
-    "static/css/2.3d86ebba.chunk.css": "/simple-waveform-visualizer/static/css/2.3d86ebba.chunk.css",
-    "static/js/2.1c6c492e.chunk.js": "/simple-waveform-visualizer/static/js/2.1c6c492e.chunk.js",
-    "static/js/2.1c6c492e.chunk.js.map": "/simple-waveform-visualizer/static/js/2.1c6c492e.chunk.js.map",
-    "index.html": "/simple-waveform-visualizer/index.html",
-    "precache-manifest.2bcb8766673d48e9bc06930928dd5ba4.js": "/simple-waveform-visualizer/precache-manifest.2bcb8766673d48e9bc06930928dd5ba4.js",
-    "service-worker.js": "/simple-waveform-visualizer/service-worker.js",
-    "static/css/2.3d86ebba.chunk.css.map": "/simple-waveform-visualizer/static/css/2.3d86ebba.chunk.css.map",
-    "static/css/main.a9624a05.chunk.css.map": "/simple-waveform-visualizer/static/css/main.a9624a05.chunk.css.map",
-    "static/media/all.min.css": "/simple-waveform-visualizer/static/media/fa-solid-900.8e1ed89b.woff2"
+    "main.js": "/static/js/main.6c377d60.chunk.js",
+    "main.js.map": "/static/js/main.6c377d60.chunk.js.map",
+    "runtime-main.js": "/static/js/runtime-main.ef277b8c.js",
+    "runtime-main.js.map": "/static/js/runtime-main.ef277b8c.js.map",
+    "static/js/2.17ec84c3.chunk.js": "/static/js/2.17ec84c3.chunk.js",
+    "static/js/2.17ec84c3.chunk.js.map": "/static/js/2.17ec84c3.chunk.js.map",
+    "static/js/3.9f96fec2.chunk.js": "/static/js/3.9f96fec2.chunk.js",
+    "static/js/3.9f96fec2.chunk.js.map": "/static/js/3.9f96fec2.chunk.js.map",
+    "index.html": "/index.html",
+    "static/js/2.17ec84c3.chunk.js.LICENSE.txt": "/static/js/2.17ec84c3.chunk.js.LICENSE.txt"
   },
   "entrypoints": [
-    "static/js/runtime-main.10b03568.js",
-    "static/css/2.3d86ebba.chunk.css",
-    "static/js/2.1c6c492e.chunk.js",
-    "static/css/main.a9624a05.chunk.css",
-    "static/js/main.ad07a5da.chunk.js"
+    "static/js/runtime-main.ef277b8c.js",
+    "static/js/2.17ec84c3.chunk.js",
+    "static/js/main.6c377d60.chunk.js"
   ]
 }
